@@ -1,0 +1,279 @@
+Data Types
+--------------------
+
+	1. Primitive types
+		- primitives types represent values directly
+
+		byte		1byte		-128 to 127
+
+		short		2bytes		-32768 to 32767
+
+		int		4bytes		-2147483648 to 2147483647
+
+		long		8bytes		
+
+		float		4bytes
+
+		double		8 bytes
+
+		boolean		1 bit		true/false
+
+		char		2bytes		
+
+
+	2. Reference types 
+		-> represent reference / memory address of objects 
+		-> Arrays, Strings, class & interface types are ref types 
+
+================================================
+-> Explore primitive types / casting / defaults
+		-for integer literals (int/long) the default is int
+		- for floating point literals the default is double 
+
+
+		12L
+		12.50F
+
+
+		float f = 25.05F;
+
+-> why strings in java are immutable?
+-> how garbadge collection works?
+-> why java uses string pooling?
+-> interning string in java
+-> write a program to validate a mobile number 
+
+	-> check if the mobile number has 10 digits
+	-> check whether it starts with 7/8/9
+	-> check if all the characters in the mobile number are digits (hint : 			Character.isDigit())
+
+-> can we create our own immutable objects?
+
+-> explore the possibilities of expressions / case constants
+
+-> operators
+	- arithmetic operators
+	- relational operators
+	- conditional operator
+	- logical operator
+
+-> Jumping statements
+	- break / continue 
+===================================================
+
+
+==>String objects and String pooling
+--------------------------------------------
+
+	-> in java, strings are objects 
+	-> in java, string objects are 'Immutable' / once string objects are created we cannot 			modify it
+
+	-> in java, there is a term called 'String pooling'
+
+	-> there is a separate area inside the 'heap memory' called as 'String Pool Area'
+	-> whenever we using 'String literals' to create string objects, these objects are 		stored inside string pool.
+
+	-> how to create string objects?
+
+		1. directly assigning the string literal 
+
+			String s1 = "Welcome";	<-- a String object may be created
+
+			s1 = s1 + "something"
+
+		2. using constructor 
+
+			String s1 = new String("welcome");  <-- every time we use 'new' 								keyword, a string object will 								be created
+
+
+
+
+	String s1 = "hello"	<-- string object is created and stored in pool
+
+	String s2 = "hello"	<-- jvm checks for the existing objects in the pool, if 					similar object is available, then it returns the ref 						of the same object
+
+
+	=> intern()
+
+
+	=> string manipulation methods
+	--------------------------------------
+
+		1. int length()
+			- returns length of the string 
+
+			String s = "hello";
+			int len = s.length();
+
+
+		2. String concat(String s)
+
+			- concatenates this string with given string object
+
+				String s1 = "hello";
+				String s2 = s1.concat(" world");
+
+		3. char charAt(int index)
+
+			String st = "welcome"		
+			char c = st.charAt(0);			? what if the index is 									incorrect
+
+		4. int indexOf(String s) or  int indexOf(char ch)  ?what if the given 									char/string not 									present
+
+		5. int lastIndexOf(String s) or  int indexOf(char ch)
+
+
+		6. int compareTo(String s)
+			-> compares this string with given string object and returns a 						'comparevalue'
+
+			-> "compareTo() is actually used in sorting collections/arrays"
+
+			> 0	: the current string is greater than the other
+
+			< 0	: the current string is less than the other
+
+			0	: both strings are equal
+
+		7. boolean equals(String s)
+			-> compares two strings and returns true if they same, otherwise false
+
+		   boolean equalsIgnoreCase(String s)
+
+		8. boolean startsWith(String s)
+
+		9. boolean endsWith(String s)
+
+==>Scanner class
+------------------------
+	
+	-> java uses the concept of 'streams' to perform input/output
+
+		keyboard
+		file
+		network socket
+		other streams
+		..
+		...
+
+	-> how to perform keyboard input using Scanner class (java.util package)
+
+		- java.util.Scanner  class breaks its input into tokens using delimiter 			pattern(default is whitespace), and the resulting tokens may be 			converted to diff types
+
+		- Scanner class methods
+
+			.next()
+			.nextLine()
+			.nextInt()
+			.nextByte()
+			.nextShort()
+			.nextDouble()
+			.nextFloat()
+			.nextBoolean()
+
+
+	Scanner scanner = new Scanner(System.in);
+
+	System.out
+	-------------
+		- out is object of type PrintStream, and it represents ref to the 'standard 				outputstream'
+
+	System.in
+	--------------
+		-  'in' is an object of type InputStream, and it represents ref to the 			'standard inputstream'
+
+	class System {
+
+		static PrintStream out;
+		static InputStream in;
+
+	}
+
+==> Decision Making statements
+-------------------------------------
+
+	if statement 
+
+		if(boolean_expression) {
+
+		}
+
+	if-else statement 
+
+	if-else if-else statement 
+
+
+	switch case statement 
+
+		-> to make a decision among multiple choices
+
+		-> in swich statements, the expression must evaluate to either 			byte/short/int/long/string/character
+
+
+
+		switch(a+b-c/10)
+
+		switch(number)
+
+		switch(choice)
+
+
+		switch(number){
+
+			case a:			//note : must be constants
+				//statements
+
+			case b:
+				//statements 
+
+			case a+b:	//wrong
+
+		}	
+
+
+
+==>Looping statements 
+-------------------------------
+
+	-> while loop
+
+		- it is entry controlled loop statement
+		- while loop is used mostly with infinite repeatations
+
+	-> for loop 
+
+		- it is entry controlled loop statement	
+
+		for(int i=1; i<=5; i++) {
+			
+		}
+	
+		for(int i=1; i<=5;) {
+			i++;
+		}
+
+		int i=1;
+		for(;i<=5;) {
+		   i++;
+		}
+
+
+	-> do-while loop 
+
+		-> it is exit controlled loop statement
+
+	-> enhanced for loop
+		- also called for each loop, used to iterate array/collections
+
+
+Action items
+--------------------
+	1. expore points mentioned here
+	2. solve 5 assignments
+	3. solve 1 mock test 
+
+
+
+
+
+
+

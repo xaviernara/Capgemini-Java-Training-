@@ -1,0 +1,352 @@
+#day3-Stringbuilder-StringBuffer-Array-Regex-Wrapperclasses
+------------------------------------------------------------
+
+=================================================
+
+-> string object capacity & memory size
+
+-> the default implementation of toString() in Object class
+
+-> multidimensional ararys / two dim arrays 
+
+
+-> Observe sorting array of custom objects i.e. Employee type array
+
+	Arrays.sort(empArr)
+=================================================
+
+String
+---------
+	- immutable / cannot modify string object once created 
+
+
+StringBuilder
+------------------
+	- we can create mutable strings 
+
+	StringBuilder sb = new StringBuilder("hello java");
+
+	-> .append(String s)
+		- appends the specified string at the end of exisiting sb object
+	   .append(char c)
+	   .append(boolean b)
+	   .append(int)
+	   .append(double) 
+		.....
+
+	-> .insert(int index, String s)
+		-> 
+
+		sb.insert(0, "hi ");		//sb => hi welcome
+
+	-> .replace(int startIndex, int endIndex, String str)
+
+	-> .delete(int startIndex, int endIndex)
+
+
+StringBuffer
+-------------------
+	- similar to StringBuilder
+	- it is synchronized / thread safe
+
+
+Object class
+----------------------
+
+	- java.lang.Object class is the supermost class in java
+	- all the classes are implicitely subclasses to Object class
+
+			Object
+			  |
+	-------------------------------------------------------------------------
+	String		StringBuilder		StringBuffer	Employee	Product ...
+
+
+	-> Object class methods
+	----------------------------
+		- boolean equals(Object o)
+		- int hashCode()
+		- String toString()
+
+		- void wait()
+		- void notify()
+		- void notifyAll()
+
+
+
+*==> Superclass ref variable can reference the child object 
+*==> Interface types can reference the object of its implemetation class 
+
+	Employee emp = new Employee();
+
+	Object obj  = new Employee();
+
+	Object obj = new Trainer();
+
+
+	Object
+	  |
+	Employee
+	  |
+	Trainer
+
+
+
+	Employee[] emp = new Employee[5];
+
+
+
+
+
+
+.toString()
+-----------------------
+	- toString() method belongs to Object class
+	- any child class of Object class, can override the toString()
+
+	- used to return the string representation of the current state of the object 
+
+	- whenever we use the ref variable in any expression, it internally calls toString() 		method
+
+
+Array
+---------------
+	-> in java Array is Object
+	-> used to store 'fixed size' collection of elements of the same type
+	-> elements are accessed using indexes
+
+
+	-> Arrays are 'Fixed size'
+	-> an array can hold primitives as well as objects 
+	-> an array of primitives types stores values directly 
+	-> an array of objects stores reference 
+
+
+Array Declaration
+-------------------
+
+	datatype[] arrName;
+
+	int[] arr;
+	
+	int arr[];
+
+	int []arr;
+
+	int [] arr;
+
+Array Creation
+---------------------
+
+	arrName = new datatype[size];
+
+	arr = new int[5];
+
+
+Array Initialization
+--------------------------
+	int[] arr= new int[5];
+
+	arr[0] = 10;
+	arr[1] = 11;
+	arr[2] = 12;
+	arr[3] = 14;
+	arr[4] = 15;
+
+
+	int[] arr = new int[] {};
+
+	int[] arr1 = new int[] {10,20,30,40,50};
+	
+	int[] arr1 = {10,20,30,40,50};
+
+Array of Objects
+---------------------------------
+	- > array of objects stores the ref.
+
+
+	Object[] objArr = new Object[10];
+
+
+Primitives types	==> any types which can be promoted to declared type
+
+object type (i.e. Employee/Product etc)
+arrays			==> either declared type or its child class object are allowed 
+
+interface type arrays	===> its implementation class objects are allowed
+
+Abstract class type arrays   ===> its child class objects are allowed 
+
+
+
+
+	byte ----> short ----> int ---> long ---> float ---> double
+		   char -------/
+
+
+
+
+
+
+			Object
+			   |
+			Number
+			   |
+		----------------------------------
+		|	|	|	|	|
+		byte	short	int	long	float 	double
+
+
+
+	Number[] numArr = new Integer[10];
+
+
+two dim arrays
+---------------------
+
+
+	int[][] arr1;
+
+
+
+Array manipulation methdos
+------------------------------
+
+	- java.util.Arrays class provides array manipulation methods
+
+	     1. Arrays.sort(array)
+		  -> sorts the elements according to the natural ordering 
+
+
+	     2. int binarySearch(array, seachValue)
+
+			- note : before using this method, the array should be sorted 
+
+	     3. compare(array1, array2)
+
+
+	     4. asList(array)
+			-> returns a List containing all the array elements 
+
+
+	     5. fill(value)
+		
+			->fills the array with given value 
+
+
+Wrapper classes
+-----------------------
+
+	-> in java, for each primitive there is a Ref type available, which is called as 'Wrapper class' i.e. for primitive int there is a ref type available called as Integer 
+
+	-> whenever primitives types needs to treated as objects, you can use wrapper classes
+
+	-> wrapper classes provide conversion methods
+
+		Integer.parseInt()
+		
+		Double.parseDouble()
+
+		Character.isDigit()
+
+	byte			Byte
+
+	short			Short
+
+	int			Integer
+
+	long			Long
+
+	float			Float
+	
+	double			Double
+
+	char			Character
+
+	boolean			Boolean
+
+	
+==> Boxing
+
+	-> convert primitive type to ref types
+
+	int i = 10;
+
+	Object obj = i;		//autoboxing
+
+	Integer intobj = i;
+
+	someMethod(10);
+
+		void someMethod(Object obj){
+
+		}
+
+==> Unboxing
+
+	-> convert ref type into primitive type
+
+
+		Object obj = 10;
+
+		int i = (int)obj;	//unboxing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	float[] fArr = new float[5];
+
+
+
+		char -----> int 		valid
+
+		int -------> long		valid
+
+		char[] -----> int[]		invalid
+
+		int[] -------> long[]		invalid
+
+
+
+--> input an array of 10 elements and search for the given number
+
+	int[] arr = {10, 20, 30, 40, 32, 32, 1, 2, 32, 23, 12, 32};
+
+	search value : ?
+
+--> input an array of 10 elements and count the occurence of the given number 
+
+
+--> input an array of 10 elements and display the second largest value 
+
+
+Action items
+------------------
+	1. explore points mentioned
+	2. solve mock tests
+	3. 5 assignments 
+	4. Read the incremental project document, monday morning you have to come up with 		design
+
+
+
+
+
+
+
+
+
+
+
+
+
