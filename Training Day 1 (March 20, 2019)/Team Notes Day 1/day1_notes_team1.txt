@@ -1,0 +1,59 @@
+Main method:
+
+	-Private: Compiled successfully, cannot find main class.
+	-Protected: Same as private.
+	-No static: Same as private. No instance of class.
+	-default: same issue
+
+	-Bottom line: All main methods need to be defined the same: public static void main(String[] args)
+	
+	-public static final void: works
+		-psvm(String[] args) required, extra keywords acceptable
+
+	-Getting rid of args: does not recognize as application
+		- "JavaFX application class must extend javafx.application.Application"
+	-Overloading works as long as one of the methods is valid i.e. psvm(String[] args). Only calls the valid one.
+	-Overloaded main can be used within psvm(String[] args) but never called upon loading the class.
+
+Java Commands:	
+	- Runs java application
+	- Starts JRE, loads class, calls main method
+	- Optional instructions can be passed through cmd line
+	- https://docs.oracle.com/javase/8/docs/technotes/tools/windows/java.html
+	- on command line, type java for documentation
+
+	java [options] classname [args]
+
+	java [options] -jar filename [args]
+
+	javaw [options] classname [args]
+
+	javaw [options] -jar filename [args]
+
+	-jar used to execute jar files, followed by filename
+	javaw = java without cmd window
+
+	[options]: e.g. verbose
+	[args]: Passed to main method String[] args
+
+Javac commands:
+	Compiles .java source code to bytecode readable by JVM.
+	
+	From https://docs.oracle.com/javase/8/docs/technotes/tools/windows/javac.html
+
+	javac [ options ] [ sourcefiles ] [ classes] [ @argfiles ]
+
+	Arguments can be in any order:
+
+	options
+	Command-line options. See Options.
+
+	sourcefiles
+	One or more source files to be compiled (such as MyClass.java).
+
+	classes
+	One or more classes to be processed for annotations (such as MyPackage.MyClass).
+
+	@argfiles
+	One or more files that list options and source files. The -J options are not allowed in these files. See Command-Line Argument Files.
+

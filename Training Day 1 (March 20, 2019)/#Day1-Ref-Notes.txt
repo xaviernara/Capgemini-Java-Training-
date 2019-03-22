@@ -1,0 +1,189 @@
+
+-> Java 6 / 7 / 8 / 9 / 10 / 11 / 12
+-> Java EE - Servlet / JDBC / JPA
+-> Spring 
+	- Core
+	- MVC
+	- Data JPA
+	- Data REST
+	- Boot
+
+  Java --> 	Programming Language
+		Platform / runtime environment 
+		Standard Library
+		
+
+JVM
+	-> Java Virtual machine
+	-> responsible to execute the bytecode
+
+JRE
+	-> java runtime environment
+	-> jvm + standard libraries 
+
+JDK
+	-> JRE + development tools (javac, jar, debug etc.)
+
+
+---------------------------------------------------------------------------
+
+	Language			Library/API			Framework	
+	-----------			---------------			------------
+
+	C#				network / io / collection	.NET
+
+	javascript			phaser / jquery / 		Angular / React
+					bootstrap 			Ember / Vue
+
+	python								Django
+
+	Java				I/O / AWT / util		Spring		
+					collection etc.
+
+	  |				   |				|
+   Programming 				simplify tasks		     standardize the process
+   capabilities
+
+
+
+				
+
+
+	Editors/IDE			Build Tools			Testing  tools
+	-----------			-------------			----------
+	Eclipse				Maven				Junit
+	Intellij Idea			Gradle
+	VS Code
+	STS
+
+
+
+Desktop applications 
+
+	-> AWT
+	-> Swing 
+	-> Java FX / OpenJFX
+
+Enterprise applications 
+
+	- Java EE
+		- Data persistence
+		- Web applications
+		- Security
+		- Messaging 
+		- json/xml handling 
+		- REST APIs
+
+cloud applications
+	- microservices
+	- microframeworks i.e. spring boot
+
+android applications
+
+
+Java Library/API
+--------------------------
+
+	Standard libraries
+		- Collection Framework / IO / util / lang / jdbc / servlet / net
+
+	Utilities apis
+		- Google Guava -- > additional collections / caching / io helpers
+		- Apache Commons ---> collections / csv / io
+		- Apache Log4J ---> application logging
+
+	apis for Distributed system
+		- Netty ----> high performance networking
+		- Akka --- Actor model for concurrency 
+		- RxJava  ---> reactive programming
+		- Apache Camel --> enterprise application integration 
+
+	API data-access
+		- JDBC ---> mysql connector / ojdbc14.jar / ojdbc5.jar
+		- ORM ---> hibernate / eclipselink / ibatis
+
+---------------------------------------------------------------------------------------------
+
+Explore about main method
+Explore about 'Class Loader'
+Explore javac commands
+Explore java commands
+Explore how classpath works
+	-> https://javarevisited.blogspot.com/2015/04/error-could-not-find-or-load-main-class-helloworld-java.html
+
+Explore How does the memory is allocated / memory allocations
+
+	-> parts of the memory stack 
+
+Explore 'static initializers' (specifically try to explore this term with before java7 and after java 7)
+
+Explore 'can we access static members with null references'?
+----------------------------------------------------------------------------------------------
+
+Variables
+---------------
+
+	datatype  varname;
+
+1. local variables
+
+	-> declared inside a method / constructor / block 
+	-> memory is allocated when the method is invoked/ destroyed when method finishes 		execution
+	-> local variables must be initialized before first use
+	-> no access modifiers
+
+2. instance variables 
+
+	-> declared inside class but outside any method/ constructor / block 
+	-> memory for instance variables is allocated, when we create object of class using
+		new keyword
+
+		Student s = new Student();
+
+	-> instance variables have default values 
+		for numbers = 0
+		for booleans = false
+		for ref types = null
+
+	-> we can use access modifiers i.e. public/ private / protected 
+	
+3. static variables  / class variables
+
+	-> declared inside class but outside any method / constructor / block using 'static' 			keyword
+
+	-> only one copy of static variable is created per class
+
+	-> memory is allocated when the class is loaded
+
+	-> default values are similar to instance variables 
+
+	-> we can use access modifiers i.e. public/ private / protected 
+
+	-> we can access static variables directly using class name 
+
+		Employee.companyName;
+
+
+
+JavaAssignments_KINID
+	|
+	|
+	|-->day1_20march_KINID
+	|	|
+	|	|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

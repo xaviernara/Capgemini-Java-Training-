@@ -1,0 +1,46 @@
+Class Loader -  Responsible for loading Java classes during runtime dynamicallyto the JVM. 
+	
+	Bootstrap Class Loader
+		|
+		|
+	Extension Class Loader
+		|
+		|
+	System Class Loader
+	
+Bootstrap Class Loader - bootstrap classloader is responsible to load key Java classes (from java.lang package) and other runtime classes 
+				to the memory first. 
+				The bootstrap classloader is a parent of all other classloaders.
+
+Extension Class Loader -is responsible for loading classes from all .jar files kept in the java.ext.dirs path–these are available regardless of the JVM’s classpath.
+
+System Class Loader - is an immediate child of the extension classloader. It loads classes from directories and jar files specified by the CLASSPATH environment variable, 
+			java.class.path system property or -classpath command line option.
+
+Class Path - is a parameter in the Java Virtual Machine or the Java compiler that specifies the location of user-defined classes and packages. 
+		The parameter may be set either on the command-line, or through an environment variable.
+
+Using Environment Variable to set Class Path - Right click Windows, Click Systems, Search View Advanced System Settings, Click Environment Variables, Under System Variables click New and set the 
+				variable name to "CLASSPATH" and the variable value to where you want to use 
+
+Apart from setting classpath to the environment variable, you can pass additional classpath to Java runtime while launching the application using –classpath argument.
+Classpath argument
+$ javac –classpath C:\dependency\framework.jar MyApp.Java
+$ java –classpath C:\dependency\framework.jar MyApp
+
+The below works in bash. This is temporary.
+set CLASSPATH=$CLASSPATH=[put the path here for lib]
+
+If your classes and packages are in different locations use the same as above but chain the directories with a semicolon.
+
+Anytime you wish to verify all path entries in CLASSPATH variable, you can verify using echo command.
+Verify classpath
+//Windows
+c:/> echo %CLASSPATH%
+
+Custom Class Loader -  custom ClassLoader is a sub class of ClassLoader which will override some methods of ClassLoader.
+
+The reason as for why the main class could not be found was the class path that was set had the incorrect location and upon removing it, 
+instead of looking in a specified path it will look in the current directory.
+
+	
