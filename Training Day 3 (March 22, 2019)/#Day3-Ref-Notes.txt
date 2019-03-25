@@ -340,11 +340,81 @@ Action items
 
 
 
+Regex / Regular Expressions
+------------------------------------
+
+	.		- matches any character
+
+	^regex		- finds regex that must match at the beginning of the line
+
+	regex$		- finds regex that must match at the end of the line 
+
+	[a-j]		- any character between a and j
+
+	[abcxyz]	- any single character from the specified group 
+
+	[a-zA-Z]	- any single character between a to z or A to Z
+
+	[^a-j]		- any single character not between a to j
+
+
+	meta characters
+	---------------------
+	\d		- any single digit 	or	[0-9]
+
+	\D		- any non-digit    or [^0-9]
+
+	\s		- any whitespace 
+
+	\S		- any non-whitespace
+
+	\w		- any word character
+
+	\W		- any non-word characters 
+
+
+
+	^[7-9]\d{9}$	: pattern for validating mobile number 
+
+	^[a-zA-Z]{5}\d{4}[a-zA-Z]$		: pattern for validating pan card
+
+
+	Quantifiers
+	-----------------
+	
+	{n}		- the previous entity occurs n times
+
+
+	{,m}
+
+	{n,m}
+
+	*		- previous entity occurs zero or more times
+
+	+		- one or more times
+
+	?		- no or one time
+
+	
+
+
+	Pattern.matches(regexpattern, stringvalue)
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+	
 
 
 
