@@ -1,0 +1,271 @@
+#day4-OOPS concepts
+------------------------------------------------------------
+
+================================================
+
+	-> final keyword
+		- final variable
+		- final method
+		- final class
+	-> inner classes 
+	-> nested classes
+	-> difference between pojo and java beans
+	-> naming conventions in java
+	-> association / composition with examples 
+================================================
+
+
+
+==> Classes & Objects
+----------------------------
+
+	-> class is user defined data type
+	-> class is blueprint of an object 
+	-> class defines state/behavior of objects 
+
+
+	-> object is an entity, has particular state/behavior
+	-> 
+
+
+
+	class <ClassName> {
+
+		//instance members
+		//static members
+
+		//constructor
+
+		//instance methods
+		//static methods
+
+		//inner class	
+
+		//abstract methods	
+
+	}
+
+
+	===>Encapsulation
+	-----------------------
+		-> binding data and code together 
+		-> data hiding 
+	
+		-> declare all fields as private	
+		-> provide public getter/setter methods 
+		-> provide appropriate constructors
+
+
+	===> classes (Beans / Java Beans / POJOs ...)
+	--------------------------------------------
+		--> single object are called as java beans / beans / pojo
+
+		--> defining java beans / pojo
+			--> all properties are private 
+			--> no-argument constructor 
+			--> public getter/setter methods 
+			--> implement 'Serializable/Externalizable interface' .........?
+
+
+			pojos
+			--------
+			--> does not extend from any other class
+			--> does not have any annotations
+				i.e. @Entity
+			
+		--> every javabean is a pojo, but every pojo is not a javabean
+---------------------------------------------------------------------------------
+
+Creating POJOs
+--------------------
+	-> provide appropriate visibility i.e  private/protected/public/default 
+	-> provide appropriate getter / setter
+	-> provide appropriate constructor
+	-> override toString()
+	-> override equals() and hashCode()
+
+==>Constructor
+------------------
+	-> special method of a class
+	-> same name as its class
+	-> called automatically when object is created
+	-> can be overloaded / parameterized
+
+	-> this()
+		-> used to invoke current class overloaded constructors
+
+	-> super()
+		-> used to invoke the super class constructor 
+
+		- i.e. 	super()
+			super(a, b);
+
+	*=> call to this() / super() must be the first line inside the constructor body
+	*=> either we can have call to this() or super()
+
+
+==> this keyword
+
+	-> this keyword to refer current class instance members
+	-> this keyword to pass the current class instance as argument 
+
+		addActionListener(this)
+		new Thread(this)
+
+	-> this() constructor 
+
+==> super keyword
+
+
+==> Method overloading
+---------------------------------
+
+	-> writing multiple methods inside a class with same name, but diff parameters 
+	-> can have any return type
+	-> can have any visibility 
+
+	-> static binding 
+
+==> Inheritance
+----------------------
+	-> whenever a class inherits another class, it is called inheritance
+	-> parent --> chlid
+	-> implements IS-A relationship 
+	
+	
+	why?
+	-> Reusability
+	-> Maintainability
+	-> Extendibility 
+
+
+	class <ClildClass> extends <ParentClass> {
+
+	}
+
+
+	-> private members can not be accessed outside the class
+
+
+----------------------------------------------------------------------
+
+	-> Aggregation
+
+	-> Association
+
+	-> Composition
+
+
+	class Address {
+
+	}
+
+
+	//association ---> HAS-A relationship 
+
+	class Supplier {
+
+		Address add;
+	}
+
+	class Customer {
+
+		Address add;
+	}
+
+-----------------------------------------------------------------------
+	*=> java doesn't support multiple inheritance 
+	*=> a class can only extends one class at a time
+	*=> a super class ref var can reference to a child object 
+---------------------------------------------------------------------------
+
+Poly-morphism
+-------------------------------------
+	-> same interface for multiple tasks
+	-> many forms of the same tasks
+	-> we can achieve polymorphism by overriding methods
+	-> an ref variable might point to diff types at diff times
+	-> based on the type of object it is pointing to, it invokes appropriate functionality
+	-> this is decided at run-time / runtime polymorphism / runtime binding / dynamic 			binding
+
+	-> Method overriding
+	-----------------------
+		-> redefining the super class method in sub class is called as 'Method 					overriding'
+
+
+	abstract class Car {
+		public abstract void move();
+	}
+
+	class BMW extends Car {
+		//override the super class method move()
+		public void move(){
+		   sysout("car moves fast");
+		}
+	}
+
+	class Ford extends Car {
+		//override the super class method move()
+		public void move(){
+		   sysout("car moves fast & smooth");
+		}
+	}
+
+
+	class Hundai extends Car {
+		//must override the abstract methods of the super class
+
+	}
+
+
+	class Driver {
+		public void driveCar(Car car){
+			car.move();
+		}
+	}
+
+	new Driver(new BMW());
+	new Driver(new Ford());
+
+
+
+Abstract class
+--------------------
+	-> defined using 'abstract' keyword
+	-> if a class contains abstract method, then the class must be marked as abstract
+
+	abstract class X {
+		//instance members
+		//static members
+		//constructors
+		//getter/setters
+		//abstract methods
+	}
+
+	-> a class who inherits from an abstract class, must override all the abstract methods
+	-> abstract classes cannot be instantiated 
+	-> 
+Abstract Methods
+--------------------
+	-> defined using 'abstract' keyword and has no body
+
+Interface
+-------------------
+	-> interface is used describe the set of requirements that a class has to implement
+	-> whenever an object has multiple is-a relationshiops, we can implement interfaces 
+
+
+	-> interface only describes the methods
+	-> in interface, all the methods are public and abstract
+
+
+
+
+
+
+
+
+
+
+
+

@@ -16,7 +16,7 @@ public class NotesMarch22 {
 	 */
 	public static void main(String[] args) {
 		SimpleDateFormat = sdf = new SimpleDateFormat ("dd-MM-yyyy");
-		Date[] birthDays =  {sdf.parse(22-03-1995)}
+		Date[] birthDays =  {sdf.parse(22-03-1995)};
 
 	}
 
