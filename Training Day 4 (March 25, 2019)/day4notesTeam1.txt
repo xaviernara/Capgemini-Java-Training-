@@ -1,0 +1,49 @@
+Day 4 notes team 1
+
+Composition extends Aggregation extends Association
+
+-> Association:
+	- Any association between two different classes. 
+	- Ex. Students are 	
+associated with a school
+	- Can be one-to-one or one-to-many
+
+
+-> Aggregation:
+	- Unilateral association
+	- HAS-A relationship between 2 objects
+	- 2 objects can survive independently
+	- Something 'owns' the other
+	- Department has students but not other way around
+
+
+-> Composition:
+	- Aggregation where 2 entities are both highly dependent (cannot survive without each other)
+	- PART-OF relationship
+	- Every Human needs a Heart, every Heart needs a Human
+	- Heart is PART OF Human
+
+
+-> POJO (Plain Old Java Object):
+	- Defines an entity
+	- No restrictions other than what is common to all Java programs
+	- Increases readability and useability of program
+	- Should not extend prespecified classes
+	- Should not implement prespecified interfaces
+	- Can not have prespecified annotations
+	- Prespecified: not defined by the pojo itself
+
+
+	
+-> Beans:
+	- Beans extends POJOs
+	- Provides more control on members than pojo
+	- Needs to implement Serializable
+		- Optional in POJO
+	- Fields need to be private
+		- Need getters/setters
+	- Needs no-arg constructor
+	- Fields accessed only by constructor
+	or getter/setters
+	
+	
