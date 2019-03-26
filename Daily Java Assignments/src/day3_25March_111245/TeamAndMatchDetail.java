@@ -9,6 +9,111 @@ import java.util.Scanner;
  */
 public class TeamAndMatchDetail {
 
+	public static void main(String[] args) {
+
+		// --------------------------------------------------------------
+		// Creating player array with user input (ie using PlayerBO's
+		// createPlayer method )
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Enter the player count ");
+		int playerCount = scan.nextInt();
+
+		Player[] player = new Player[playerCount];
+		PlayerBO2 playerBO = new PlayerBO2();
+
+		for (int i = 0; i < player.length; i++) {
+
+			System.out.println("Enter Player " + (i + 1) + "details ");
+			String playerDetails = scan.next();
+
+			playerBO.createPlayer(playerDetails);
+		}
+
+		// --------------------------------------------------------------
+		// Creating team array with user input (ie using TeamBO's createTeam
+		// method )
+		System.out.println("Enter the team count ");
+		int teamCount = scan.nextInt();
+
+		Team[] team = new Team[teamCount];
+		TeamBO teamBO = new TeamBO();
+		for (int i = 0; i < team.length; i++) {
+			System.out.println("Enter team " + (i + 1) + "details ");
+			String teamDetails = scan.next();
+
+			teamBO.createTeam(teamDetails, player);
+		}
+
+		// --------------------------------------------------------------
+		// Creating match array with user input (ie using MatchBO's createMatch
+		// method )
+		System.out.println("Enter the match count ");
+		int matchCount = scan.nextInt();
+
+		Match[] match = new Match[matchCount];
+		MatchBO matchBO = new MatchBO();
+
+		for (int i = 0; i < match.length; i++) {
+			System.out.println("Enter match " + (i + 1) + "details ");
+			String matchDetails = scan.next();
+
+			matchBO.createMatch(matchDetails, team);
+		}
+
+		// --------------------------------------------------------------
+		// creating menu :
+		// Using match array to find specific a team based on user input (ie
+		// using MatchBO's findTeam method )
+		// Using match array to find all matches specific to a team based on
+		// user input (ie using MatchBO's findTeam method )
+		boolean menuContinue = true;
+		while (menuContinue) {
+
+			System.out.println("Menu : ");
+
+			System.out.println("1) Find Team");
+			System.out.println("2) Find All Matches In A Specific Venue");
+			System.out.println("Type 1 or 2");
+			System.out.println("Enter your choice");
+			int menuChoice = scan.nextInt();
+
+			System.out.println("Enter Match date ");
+			String matchDate = scan.next();
+
+			if (menuChoice == 1) {
+
+				System.out.println("Team: ");
+
+				matchBO.findTeam(matchDate, match);
+
+			}
+
+			else {
+				System.out.println("Match Details: ");
+				System.out.println("Enter Team Name ");
+				System.out.println("Date	TeamOne		TeamTwo		Venue");
+				String teamName = scan.next();
+
+				matchBO.findAllMatchesOfTeam(teamName, match);
+			}
+
+			System.out.println("Do you want to continue? Type Yes or No");
+			String continueChoice = scan.next();
+
+			if (continueChoice == "yes") {
+
+				continue;
+
+			} else {
+				menuContinue = false;
+			}
+		}
+
+	}
+
+}
+
+class Player {
 	private String name;
 	private String country;
 	private String skill;
@@ -37,7 +142,7 @@ public class TeamAndMatchDetail {
 		this.skill = skill;
 	}
 
-	public TeamAndMatchDetail(String name, String country, String skill) {
+	public Player(String name, String country, String skill) {
 		this.name = name;
 		this.country = country;
 		this.skill = skill;
@@ -260,105 +365,4 @@ class MatchBO {
 
 	}
 
-}
-
-class Program {
-
-	public static void main(String[] args) {
-
-		// --------------------------------------------------------------
-		// Creating player array with user input (ie using PlayerBO's createPlayer method )
-		Scanner scan = new Scanner(System.in);
-		System.out.println("Enter the player count ");
-		int playerCount = scan.nextInt();
-
-		Player[] player = new Player[playerCount];
-		PlayerBO2 playerBO = new PlayerBO2();
-
-		for (int i = 0; i < player.length; i++) {
-
-			System.out.println("Enter Player " + (i + 1) + "details ");
-			String playerDetails = scan.next();
-
-			playerBO.createPlayer(playerDetails);
-		}
-
-		// --------------------------------------------------------------
-		// Creating team array with user input (ie using TeamBO's createTeam method )
-		System.out.println("Enter the team count ");
-		int teamCount = scan.nextInt();
-
-		Team[] team = new Team[teamCount];
-		TeamBO teamBO = new TeamBO();
-		for (int i = 0; i < team.length; i++) {
-			System.out.println("Enter team " + (i + 1) + "details ");
-			String teamDetails = scan.next();
-
-			teamBO.createTeam(teamDetails, player);
-		}
-
-		// --------------------------------------------------------------
-		// Creating match array with user input (ie using MatchBO's createMatch method )
-		System.out.println("Enter the match count ");
-		int matchCount = scan.nextInt();
-
-		Match[] match = new Match[matchCount];
-		MatchBO matchBO = new MatchBO();
-
-		for (int i = 0; i < match.length; i++) {
-			System.out.println("Enter match " + (i + 1) + "details ");
-			String matchDetails = scan.next();
-
-			matchBO.createMatch(matchDetails, team);
-		}
-
-		// --------------------------------------------------------------
-		// creating menu :
-		//Using match array to find specific a team based on user input (ie using MatchBO's findTeam method )
-		//Using match array to find all matches specific to a team based on user input (ie using MatchBO's findTeam method )
-		boolean menuContinue = true;
-		while (menuContinue) {
-
-			System.out.println("Menu : ");
-
-			System.out.println("1) Find Team");
-			System.out.println("2) Find All Matches In A Specific Venue");
-			System.out.println("Type 1 or 2");
-			System.out.println("Enter your choice");
-			int menuChoice = scan.nextInt();
-
-			System.out.println("Enter Match date ");
-			String matchDate = scan.next();
-
-			if (menuChoice == 1) {
-
-				System.out.println("Team: ");
-
-				matchBO.findTeam(matchDate, match);
-
-			}
-
-			else {
-				System.out.println("Match Details: ");
-				System.out.println("Enter Team Name ");
-				System.out.println("Date	TeamOne		TeamTwo		Venue");
-				String teamName = scan.next();
-
-				matchBO.findAllMatchesOfTeam(teamName, match);
-			}
-
-			System.out.println("Do you want to continue? Type Yes or No");
-			String continueChoice = scan.next();
-
-			if (continueChoice == "yes") {
-
-				continue;
-				
-			} 
-			else {
-				menuContinue = false;
-			}
-		}
-
-	}
 }
