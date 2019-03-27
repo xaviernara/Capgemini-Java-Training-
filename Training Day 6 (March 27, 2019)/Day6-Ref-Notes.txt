@@ -1,0 +1,406 @@
+==========================================
+
+
+	=> explore about overriding equals() method
+	=> Preserve the equality contract when overriding the equals() method
+	=> equals() and hashCode() contract
+
+
+	=> Enumeration / Iterator / ListIterator
+
+	=> List of numbers / strings / date objects and sort it (find natural ordering)
+
+??????	=> how HashSet internally works?
+
+==========================================
+
+
+
+
+	-> Java Basics
+	-> java language essentials
+		-> data types
+		-> decision making
+		-> looping
+		-> arrays
+		-> strings
+		-> methods
+		-> class and objects
+	
+Standard libraries/ packages / apis
+---------------------------------------------
+
+*=> Collection Framework api
+----------------------------------
+
+	-> provides data structures to create dynamically allocated group of objects 
+	-> java.util package provides all interfaces, and their implementaion classes
+
+
+
+		   Iterable<E> (i)	---> iterator();
+		        |
+		   Collection<E> (i)
+			|
+    ----------------------------------------------------------------
+    |				|				|
+ List<E> (i)  		      Set<E> (i)		     Queue <E> (i)
+    |				|			 	|
+ArrayList<E>		    HashSet<E>			-------------------
+LinkedList<E>		    LinkedHashSet<E>		|		  |
+Vector<E>		    TreeSet<E>		      Deque<E>(i)    BlockingQueue<E>(i)
+Stack<E>						|
+						    BlockingDeque<E>(i)
+
+
+			Map<K,V> (i)
+			   |
+			HashMap<K,V>
+			LinkedHashMap<K,V>
+			TreeMap<K,V>
+			HashTable<K,V>
+
+
+
+Collection<E> interface
+-------------------------------
+	-> the supermost interface in the collection hierarchy, which describes some common 			methods
+
+		public boolean add(Object o)
+		public boolean addAll(Collection c)
+		public boolean remove(Object o)
+		public int size()
+		public void clear()
+		public boolean contains(Object o)
+		...
+		...
+
+List<E> interface
+-----------------------
+	-> models a collection objects, which is index based 
+	-> allows duplicate elements 
+	-> i.e. ArrayList, LinkedList are frequently used implementations of list interface 
+
+
+Set<E> interface
+---------------------
+	-> models a collection of unique elements
+	-> doesn;t allow duplicates 
+	-> i.e. HashSet, LinkedHashSet, Treeset 
+
+Queue<E> interface
+------------------------
+	-> models a collection fo objects which used FIFO approach 
+	-> PriorityQueue, ArrayDeque, etc. 
+	
+
+Map<K,V> interface
+-----------------------
+	-> models a collection of objects stored using 'key-value' pairs 
+	-> HashMap, LinkedHashMap, TreeMap, HashTable, etc.
+		
+
+========================================================================================
+
+List<E> interface
+------------------------
+	-> List is kind of collection, used to create index based collection of objects 
+	-> List allows null and duplicate elements 
+	-> a List Collection maintains "order of insertion"
+	-> A List can store only "objects"
+
+
+	**=> primitives cannot be stored on any Collection
+
+
+			Collection
+			    |
+			  List
+			    |
+			AbstractList (abstract class)
+			    |
+	----------------------------------------------------
+	|		    |		  |		
+	ArrayList	LinkedList	Vector
+					  |
+					Stack
+
+
+
+Implementation classes of List Interface
+---------------------------------------------
+
+	1. ArrayList
+
+		-> internally ArrayList uses 'resizable-array' as a data structure 
+		-> initial capacity = 10
+		-> performance is slow, due to frequent shifting while inserting/removing
+
+	2. LinkedList
+		-> internally uses 'double-linked-list' data structure
+		-> initial capacity = N/A
+
+	3. Vector 
+		-> similar to ArrayList
+		-> synchronized
+
+	4. Stack
+		-> similar to ArrayList
+		-> synchronized
+		-> LIFO approach
+
+
+Operations on List 
+------------------------------
+
+	1. Creating a list 
+
+
+		//non-generic 
+		ArrayList list1 = new ArrayList();
+		List list2 = new ArrayList();
+		
+		
+		//generic 
+		List<Integer> list3 = new ArrayList<>();
+		List<Integer> list3 = new LinkedList<>();
+
+		List<String> names = new ArrayList<>();
+
+
+
+	2. Basic operations on list
+	--------------------------------------
+
+		a. add an element on a list
+
+			.add(object o)
+			.add(int index, object o)
+			.addAll(Collection c)
+
+		b. removing element from a list 
+	
+			.remove(int index)
+	
+			.remove(object o)
+				->note: it uses equals() method to compare the given object 						with all the other object
+				-> if you have, a collection of custom objects, make sure 						that, the equals() is implemented correctly
+
+
+		c. retrieve element from a list
+
+			Object get(int index)
+
+			E get(int index)
+
+		d. updating elements 
+
+			.set(int index, Object o)
+
+
+
+	3. Iterating over a list
+	-----------------------------------
+
+		a. using classic for loop 
+
+			for(int i=0; i<list.size(); i++){
+				int value = list.get(i);
+				sysout(value);
+			}
+
+		b. enhanced for loop 
+
+			for(int value : list){
+				sysout(value)
+			}
+
+		c. using iterator
+
+			Iterator<Integer> itr = list.iterator();
+
+			while(itr.hasNext()){
+				int value = itr.next();
+				sysout(value);
+			}
+
+
+	4. Searching an element on a list
+	
+		boolean contains(object o)
+		int indexOf(object o)
+		int lastIndexOf(object o)
+
+
+	5. Sorting a list
+
+		Arrays.sort(array)
+		Collections.sort(list)
+
+
+			*=> internally uses 'compareTo()' to compare two objects 
+
+	6. Copying one list into another
+
+			Collections.copy(dest, src)
+
+	7. Shuffling elements in a list
+
+			Collections.shuffle(list)
+
+	8. converting a list to array / array to list
+
+
+
+
+	ArrayList		LinkedList		Vector		Stack
+
+	ordered	by		ordered	by		ordered	by	ordered	by
+	insertion		insertion		insertion	insertion
+
+	nullvalues		nullvalues		nullvalues	nullvalues
+
+	duplicates		duplicates		duplicates	duplicates
+
+	10			N/A			10		10
+
+	resizable		double			resizable	resizable
+	array			linked list		array		array
+
+
+
+Set<E> interface
+---------------------------
+	-> doesn't allow duplicate elements 
+
+
+Implemetation classes of set interface
+--------------------------------------
+
+	1. HashSet
+
+		-> uses 'hashtable' data structure
+		-> doesn't guarantee the order of insertion
+
+	2. LinkedHashSet
+
+		-> uses 'hashtable + double linked list' data structure
+		-> maintains order of insertion
+
+	3. TreeSet
+
+		-> uses 'balance tree' data structure
+		-> maintains sorted order of elements according to the natural ordering
+
+
+
+	
+Operations on set
+---------------------------
+
+	1. adding element 
+	2. removing element 
+	3. iterating element 
+	4. searching elemnet 	
+
+	*=> whenever we use any hashtable based collection, for storing custom objects, make 			sure you correctly override equals() and hashCode() methods
+
+
+
+
+Comparable interface 
+--------------------------
+
+	-> to specify the natural ordering, you can implement Comparable interface
+
+
+		interface Comparable<E>{
+			public abstract int compareTo(Object o)
+		}
+
+
+		class Employee implements Comparable{
+
+			public int compareTo(Object o){
+				
+			}						
+
+		}
+
+	comparevalue
+	--------------------
+
+		>1	: this object is greater than other
+
+		<1	: this object is less than other
+
+	
+		=0	: both objects are same
+
+
+	
+
+
+
+
+
+
+
+
+
+	e1		e2		e3		e4		e5
+	|		|
+
+
+
+	...
+	...
+	empSet.add(new Employee(...));
+
+		-> this.compareTo(e1)
+
+
+
+
+
+
+Comparator interface 
+--------------------------
+	-> used to create exeternal comparators 
+
+		interface Comparator<E> {
+			public abstract int compare(Object o1, Object o2);
+		}
+
+
+
+		class EmpIdComparator implements Comparator<Employee>{
+			//override
+			public int compare(Employee e1, Employee e2){
+				//logic to compare....
+			}
+		}
+
+
+		Set<Employee> empSet = new TreeSet<>(new EmpIdComparator());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
