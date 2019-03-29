@@ -36,7 +36,7 @@ public class WalletDAOImp implements WalletDAO {
 	}
 
 	@Override
-	public void withdraw(Wallet account, int withdrawl ) {
+	public void withdraw(Wallet account, int withdrawl) {
 		
 		System.out.println("Your new balance before withdrawl: " + account.viewBalance());
 		
@@ -48,20 +48,25 @@ public class WalletDAOImp implements WalletDAO {
 	}
 
 	@Override
-	public Customer printAllAccounts(Set<Wallet> account) {
-		// TODO Auto-generated method stub
-		return null;
+	public void printAllAccounts(Set<Wallet> accounts) {
+		
+		for (Wallet wallet: accounts){
+			
+			System.out.println(accounts.toString());
+		}
 	}
 
 	@Override
-	public void signUp(Set<Customer> newCustomers) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public boolean validateSignUp() {
-		// TODO Auto-generated method stub
+	public boolean validateLogin(Set<Wallet> accounts, String password, String userName) {
+		
+		for (Wallet wallet: accounts){
+			
+			if ((wallet.getCustomer().getPassword().equals(password)) && (wallet.getCustomer().getUserName().equals(userName))){
+				
+				return true;
+			}
+		}
+		
 		return false;
 	}
 
@@ -69,12 +74,6 @@ public class WalletDAOImp implements WalletDAO {
 	public boolean validateAmmountAdditionRequest() {
 		// TODO Auto-generated method stub
 		return false;
-	}
-
-	@Override
-	public int addFunds(int newDeposit, Wallet account) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override

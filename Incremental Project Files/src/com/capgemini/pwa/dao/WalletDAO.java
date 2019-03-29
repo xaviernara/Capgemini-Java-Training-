@@ -21,20 +21,20 @@ public interface WalletDAO {
 	 * their account
 	 * 
 	 */
-	void deposit(Customer customer ,int newMoney);
+	public void deposit(Wallet account, int newMoney);
 
 	/*
 	 * withdraw() will return the money that a customer wants to transfer to
 	 * another user and return the new balance after withdrawal
 	 */
-	int withdraw(Customer customer);
+	public void withdraw(Wallet account, int withdrawl);
 	
 	
 	/*
 	 * print all the Customers with accounts
 	 * 
 	 */
-	Customer printAllAccounts(Set<Customer> customers);
+	public void printAllAccounts(Set<Customer> customers);
 
 	/*
 	 * Given the user signup / register / create account page, the user is able

@@ -24,14 +24,14 @@ public class Wallet {
 	}
 
 
-
+	/*
 	public Customer addAccount(String dateOfBirth, long SSD, String fullName, int deposit, int phoneNumber, String email, String password, int accountNumber, String userName) {
 		
 		customer = new Customer(dateOfBirth,SSD,fullName,deposit,phoneNumber,email,password,accountNumber, userName);
 		System.out.println("Account Created!!!");
 		return customer;
 	}
-	
+	*/
 	
 
 	public Customer getCustomer() {
