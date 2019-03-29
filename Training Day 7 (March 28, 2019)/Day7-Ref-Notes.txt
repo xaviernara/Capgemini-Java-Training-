@@ -1,0 +1,235 @@
+
+=> equals() and hashCode()
+   		
+=> Comparable
+	-> override 'compareTo(Obejct ob)
+	-> specify natural ordering of a custom object 
+
+=> Comparator
+	-> override 'compare(Object o1, Object o2)
+	-> create external comparators 
+	=> 
+
+
+*==>contracts
+---------------
+
+	1. equality contract 
+
+	2. equals() and hashCode()
+
+	3. equals() and Comparable/Comparator
+
+		=> If two objects are considered equal by the equals operation, then try to 			make those objects must equal by the Comparable or Comparator test.
+
+============================================================
+
+	=> why HashMap allows one null key
+
+	=> how HashMap works internally
+
+
+	
+============================================================
+
+
+
+		Collection<E> (i)
+			|
+    ----------------------------------------------------------------
+    |				|				|
+ List<E> (i)  		      Set<E> (i)		     Queue <E> (i)
+    |				|			 	|
+ArrayList<E>		    HashSet<E>			-------------------
+LinkedList<E>		    LinkedHashSet<E>		|		  |
+Vector<E>		    TreeSet<E>		      Deque<E>(i)    BlockingQueue<E>(i)
+Stack<E>						|
+						    BlockingDeque<E>(i)
+
+
+	set.add(10);
+	set.add(20);
+	set.add(10);	---> returns false
+	
+
+
+			Map<K,V> (i)
+			   |
+			HashMap<K,V>
+			LinkedHashMap<K,V>
+			TreeMap<K,V>
+			HashTable<K,V>
+
+
+
+Map<K,V> Interface
+-------------------------------
+
+	-> models a collection of objects, stored using key-value pairs 
+
+	-> doesn;t allow duplicate keys 
+
+		name-address
+		name-phone
+		kin-employee
+		isbn-book
+
+
+	methods of Map<K,V> interface
+	--------------------------------
+
+	E put(K key, E element)
+		-> adds the given entry in map
+
+	E get(K key)
+		- returns the element, that matches the given key
+
+	boolean containsKey(K key)
+
+	boolean containsValue(V value)
+
+
+
+
+	Set<K> keySet()
+		- returns a Set containing all the keys from the map 
+
+	Collection<E> values()
+		- returns a Collection containing all the values from the map
+
+	Set<Map.Entry<K,V>> entrySet()
+
+
+
+
+
+
+
+Implementation classes of Map interface
+------------------------------------------
+
+	1. HashTable<K,V>
+
+		-> doesn;t allow null key
+		-> doesn;t maintain order of insertion
+		-> uses 'hashtable' datastructure
+		-> it is synchronized 
+			(all methods in HashTable class are synchronized)
+		
+	2. HashMap<K,V>
+
+		-> allows one null key
+		-> doesn;t maintain order of insertion
+		-> uses 'hashtable' data structure
+
+	3. LinkedHashMap<K,V>
+
+		-> allows one null key
+		-> maintains order of insertion
+		-> uses 'hashtable + double linked list' data structure
+
+
+	4. TreeMap<K,V>
+
+		-> doesn;t allow null key
+		-> maintains sorted order of key, according to their natural ordering 
+		-> uses 'red black tree' data structure
+
+		Map<String, String> map = new TreeMap<>();
+
+		Map<Manager, List<Workers>> map = new TreeMap<>();
+
+
+==> Queue
+-------------------
+
+	-> Queue interface models a collection of elements which supports FIFO approach
+
+	-> Queue has a head and tell, new elements are added to the tail, and to-be processed 			elements are picked/removed from the head
+	
+	-> Deque models a queue collection, but it is double headed
+
+	-> BlockingQueue is a capacity based queue
+
+			Queue<E>
+			  |
+		   -------------------------
+		   |			  |
+		 Deque<E>		BlockingQueue<E>
+		  |
+	     BlockingDeque<E>
+		
+
+Implementation classes of Queue
+-------------------------------------
+
+	=> General purpose implementations
+
+		LinkedList
+			-> maintains order of insertion
+
+		PriorityQueue
+			-> maintains sorted order of elements 
+
+		ArrayDeque
+			-> double ended queue
+
+	=> Concurrent implementations
+
+		ArrayBlockingQueue
+	
+		PriorityBlockingQueue
+
+		DelayQueue
+
+
+
+Operations of Queues
+-------------------------------
+
+	Queue interface methods
+	-----------------------------------
+
+	insert		: add(e)		offer(e)
+
+	remove		: remove()		poll()
+
+	examine 	: element()		peek()
+
+
+	Deque interface methods
+	-----------------------------------
+
+	insert		: add(e)		offer(e)
+			  addFirst(e)		offerFirst(e)
+			  addLast(e)		offerLast(e)	
+	
+
+	remove		: remove()		poll()
+			  removeLast()		pollLast()
+			  removeFirst()		pollFirst()
+
+	examine 	: element()		peek()
+			  getFirst()		peekFirst()
+			  getLast()		peekLast()
+
+	
+
+	BlockingQueue interface methods
+	-----------------------------------
+
+	insert		: add(e)		offer(e)	put(e)
+
+	remove		: remove()		poll()		take(e)
+
+	examine 	: element()		peek()
+
+
+
+
+
+
+
+
+
+

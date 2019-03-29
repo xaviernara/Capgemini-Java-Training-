@@ -206,7 +206,7 @@ Data Types
 
 		-> to make a decision among multiple choices
 
-		-> in swich statements, the expression must evaluate to either 			byte/short/int/long/string/character
+		-> in swich statements, the expression must evaluate to either 	byte/short/int/long/string/character
 
 
 

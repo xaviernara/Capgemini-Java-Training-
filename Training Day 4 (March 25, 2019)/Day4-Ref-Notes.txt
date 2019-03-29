@@ -4,9 +4,11 @@
 ================================================
 
 	-> final keyword
-		- final variable
-		- final method
-		- final class
+		- final variable - constant, must initailize
+		- final method - cannot be overriden 
+		- final class - cannot be be inherited 
+		- When to use : require a variable that can't be overwritten, class that cannot be inherited or method that cannot be overrided 
+		
 	-> inner classes 
 	-> nested classes
 	-> difference between pojo and java beans

@@ -71,6 +71,10 @@ Object class
 		- void wait()
 		- void notify()
 		- void notifyAll()
+		-Class getClass()
+		-String toString()
+		-Object clone()
+		-void finalize()
 
 
 

@@ -128,7 +128,7 @@ Variables
 1. local variables
 
 	-> declared inside a method / constructor / block 
-	-> memory is allocated when the method is invoked/ destroyed when method finishes 		execution
+	-> memory is allocated when the method is invoked/ destroyed when method finishes execution
 	-> local variables must be initialized before first use
 	-> no access modifiers
 
@@ -149,7 +149,7 @@ Variables
 	
 3. static variables  / class variables
 
-	-> declared inside class but outside any method / constructor / block using 'static' 			keyword
+	-> declared inside class but outside any method / constructor / block using 'static' keyword
 
 	-> only one copy of static variable is created per class
 

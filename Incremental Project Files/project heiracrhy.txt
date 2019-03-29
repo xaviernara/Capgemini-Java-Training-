@@ -1,0 +1,27 @@
+
+
+Payment_wallet_app_sprint1_YOURKIN_ID
+	|
+	|
+	|-->src
+	|   |->com.capgemini.pwa.beans
+	|   |	|->Customer
+	|   |	|->Wallet
+	|   |
+	|   |->com.capgemini.pwa.dao
+	|   |   |->WalletDAO  (interface) --->
+	|   |	|->WalletDAOImp
+	|   |		-> transfer
+	|   |		-> deposit
+	|   |		-> withdraw
+	|   |	 	-> findOne
+	|   |		-> findAll
+	|   |
+	|   |->com.capgemini.pwa.services
+	|   |
+	|   |->com.capgemini.pwa.exceptions
+	|   |
+	|   |->com.capgemini.pwa.tests
+	|   |->com.capgemini.pwa
+	|   |	->MainClass
+			->
