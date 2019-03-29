@@ -10,7 +10,7 @@ import java.util.*;
 public class Player {
 	private String name;
 	private String country;
-	private String skill;
+	private Skill skill;
 
 	public String getName() {
 		return name;
@@ -36,13 +36,14 @@ public class Player {
 		this.skill = skill;
 	}
 
-	public Player(String name, String country, String skill) {
+	public Player(String name, String country, Skill skill) {
 		this.name = name;
 		this.country = country;
 		this.skill = skill;
 	}
 
 	@Override
+	//Use toString() method ("%-15s %-15s %-15s",to display the Player details)
 	public String toString() {
 		return String.format("%-15s %-15s %-15s", name, country, skill.toString());
 	}
@@ -52,12 +53,10 @@ public class Player {
 	// ----------------------------------------------------------------
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-		PlayerBO playBO = null;
-		Scanner scan = new Scanner(System.in);
+		PlayerBO playBO = new PlayerBO();
+		Scanner scan = new Scanner(System.in).useDelimiter(System.lineSeparator());
 
-		Player player = null;
 
 		System.out.println("Enter number of Players");
 		int numOfPlayers = scan.nextInt();
@@ -70,19 +69,16 @@ public class Player {
 
 			String playerName = scan.next();
 
-			player.setName(playerName);
-
 			System.out.println("Enter country name ");
-			
-			String playerCountry = scan.next();
 
-			player.setCountry(playerCountry);
+			String playerCountry = scan.next();
 
 			System.out.println("Enter skill ");
 			String playerSkill = scan.next();
+			
+			Skill skill = new Skill(playerSkill);
 
-			player.setSkill(new Skill(playerSkill));
-			//Player player = new Player(playerName, playerCountry, new Skill(playerSkill));
+			Player player = new Player( playerName, playerCountry, skill); 
 
 			playerArray[i] = player;
 
@@ -129,6 +125,7 @@ class Skill {
 	}
 
 	@Override
+	//Use toString() method ("%-15s",to display the Skill details)
 	public String toString() {
 
 		return String.format("%-15s", skillName);
@@ -142,6 +139,7 @@ class Skill {
 
 class PlayerBO {
 
+	// This method is used to print the all the details
 	public void viewDetails(Player[] playerList) {
 
 		for (int i = 0; i < playerList.length; i++) {
@@ -151,11 +149,17 @@ class PlayerBO {
 
 	}
 
+	/*
+	 * In this method, display all player details of a specific skill (from
+	 * Skill). If the status being searched is not found in the list, display
+	 * the message “Skill not found”. Refer sample output.
+	 * 
+	 */
 	public void printPlayerDetailsWithSkill(Player[] playerList, String skill) {
 
 		for (Player p : playerList) {
 
-			if (skill == p.getSkill().toString()) {
+			if (p.getSkill().toString().equals(skill)) {
 
 				System.out.println(p);
 			} else {
