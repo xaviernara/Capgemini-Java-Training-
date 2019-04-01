@@ -1,9 +1,7 @@
 package com.capgemini.pwa.beans;
 
 public class Wallet {
-
 	
-
 	private double balance;
 	private Customer customer;
 	private String accountType;
@@ -11,8 +9,6 @@ public class Wallet {
 	public String getAccountType() {
 		return accountType;
 	}
-
-
 
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
@@ -38,13 +34,9 @@ public class Wallet {
 		return customer;
 	}
 
-
-
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-
-
 
 	/*
 	 * Given the addition of amount is successful, the new account balance
@@ -64,6 +56,9 @@ public class Wallet {
 	}
 	
 	
+	public Wallet() {
+		super();
+	}
 
 	@Override
 	public String toString() {

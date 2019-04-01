@@ -45,14 +45,28 @@ public class WalletDAOImp implements WalletDAO {
 	}
 
 	private boolean validateAccountNumber(Wallet[] account, int accountNumber) {
+		
+		int count =0;
 		for (Wallet wallet : account) {
 
 			if (wallet.getCustomer().getAccountNumber() == accountNumber) {
-				return true;
+				count++;
+				
 			}
 		}
-
+		
+		if (count == 1){
+			return true;
+			
+		}else if(count == 0){
+			
+			System.out.println("That account number was not found");
+			return false;
+		}
+		
+		System.out.println("That account number belongs to someone else");
 		return false;
+
 	}
 
 	@Override

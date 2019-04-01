@@ -1,0 +1,385 @@
+
+==========================
+
+	--explore all the possible try-catch block combinations
+
+===============================
+
+
+Exception Handling
+-----------------------------------
+	-> unwanted/unexpected event that disturbs the normal flow the program is called 		Exception
+
+1. compile time errors
+
+	- missing semicolons
+	- use of undeclared variables
+	- imcompatible types in assignments
+	- misspellings etc.
+
+2. run time errors  / exceptions 
+	
+	-> divide an integer by zero
+	-> access an element that is out the bounds of an array
+	-> physical failure in hard disk/network
+	-> wrong input
+	->.....
+
+Exception handling
+---------------------------------
+
+	1. find the problem (hit the exception)
+
+	2. inform that an error has occured (throw the Exception)
+
+	3. receive the error information (catch the Exception)
+
+	4. take corrective action (handle the exception)
+
+
+runtime stack mechanism
+--------------------------
+	1. for every thread JVM will creates a runtime stack
+
+	2. every method call performed by that thread, will be stored in the corresponding 			stack
+		-> every entry in the stack is called 'ActivationRecord / Stack Frame'
+
+	3. during execution, if an Exception raised at any point, then 
+		the method will create 'Exception object' and it hand overs that Exception 		object to JVM
+
+	4. JVM checks whether the method contains any exception handling code, then it passes 		the exception object to the corresponding catch block otherwise
+		it terminates the caller method and removes the entry from the stack
+
+
+
+
+
+
+Exception class hierarchy
+-------------------------------------
+
+
+				Throwable
+				   |
+		--------------------------------------------------
+		|						|
+	      Error					    Exception
+								|
+			-----------------------------------------------------
+			|		|		|		|
+		RuntimeException    IOExcetion	  SQLException	    	|-> InterrupedExeptions									    
+			|		|		|		|-> AWTException
+			|		|		|
+		ArithmeticException
+		NullPointerException
+		ArrayIndexOutofBoundsException
+		IllegalArgumentException
+		...
+		....
+
+
+
+
+*==> Error class describes internal errors
+		i.e VirtualMachineError, LinkageError
+
+*==> Exception class describes errors caused by programs
+		i.e. FileNotFoundException , IOException, ArithmeticException etc.
+
+*==> Exceptions are objects, when you throw an Exception, you throw an object
+		i.e. you can not throw any object, you can throw only those objects who are 			descendant of Throwable
+
+
+
+
+Checked and Unchecked Exceptions
+----------------------------------------
+
+
+*=> Checked Exception
+
+	-> the exceptions which are checked by the compiler for smooth execution fo the 		program
+	-> you must handle the checked exception at your own, otherwise you need to declare it 		to be thrown
+
+	-> all the exceptions except RuntimeException are checked 
+
+
+*=> Unchecked Exception
+	
+	-> are not essentially handled in the program
+	-> if you don;t handle these exceptions, then jvm will handle it by  default
+
+	
+*==>Fully Checked Exceptions / Partially Checked Exceptions
+
+	-> a Checked Exception is said to be fully checked if and only all of its child classes also checked 
+
+
+		IOException		---> fully checked
+
+		RuntimeException 	---> unchecked
+
+		InterruptedException	---> fully checked
+
+		Error			---> unchecked
+
+		Throwable		---> partially checked
+
+		Exception		---> partially checked
+
+		ArithmeticException	---> unchecked
+
+How to handle Exceptions
+-------------------------------
+	
+
+	1. using try-catch blocks 
+
+
+	   a.try-catch-finally
+	  -------------------------------
+		try{
+			//code to be monitored
+
+		}catch(ExceptionType ex){
+
+			//code to handle the exception
+		}finally{
+
+		}
+
+	  b. nested try--catch---
+	  -----------------------------------
+
+
+	  c. try-catch
+	  ----------------------------------------
+
+
+	  d. try--finally
+	  -----------------------------------
+
+
+	  
+
+
+
+
+	2. using 'throw' keyword
+	--------------------------------
+
+		-> if you want to throw an exception explicitely 
+		-> throw keyword is used to throw custom exceptions
+
+
+	3. using 'throws' keyword
+
+		-> used to declare the exception to be thrown
+		-> using throws keyword, we just delegate the reposibility of handling 
+			the exception to the caller method
+	
+
+Printing the exception
+---------------------------
+
+	1. sysout(ex)
+		-> shows name of exception and description
+
+	2. ex.printStackTrace()
+
+	3. ex.getMessage()	
+		-> shows the description 
+
+finally block
+------------------------
+
+		try{
+
+		}catch(X e){
+
+		}finally{
+		   //perform the clean-up code
+		   //always executes
+		}
+
+
+---------------------------------------------------------
+
+try		--> to monitor the code / risky code
+
+catch		--> to define the exception handling code
+
+finally		--> to perform clean-up operations i.e. closing db connection etc.
+
+throw		--> to hand over the custom exception object to JVM
+
+throws		--> to delegate the responsibility of exception handling to the the caller 
+			method
+
+Common Exceptions
+----------------------------------------------------------
+
+	*=> JVM Exceptions
+
+		-> raised by JVM when a particular event occures 
+
+		ArithmeticExceptions
+
+
+		ArrayIndexOutOfBoundsException 
+
+
+		NullPointerException 
+			- when we try to perform any method call on null references 
+		
+		ClassCastException
+			-> occurs when we try to type cast parent object to child
+
+		NoClassDefFoundError
+			- occurs when JVM unable to find the required .class file
+
+		ClassNotFoundException 
+
+		
+		
+
+	*=> Programmatic Exceptions
+
+		IllegalArgumentException
+
+
+		NumberFormatException
+
+	
+		IllegalStateException
+
+
+		InvalidAgeException 
+
+-------------------------------------------------------------------------------
+
+Java 7 enhancements 
+------------------------------
+
+	1. try with resources 		
+		-> before java7 it was highly recommed to write finally block to close 
+			the resoures
+		-> in java7 try-with-resources concept is introduced
+
+		-> the advantage of try-with-resource is the the resources which are 
+			opened as part of try block will be closed automatically
+
+			try(open resources){
+				//write code
+			}catch(Exeption ex){
+
+			}
+
+	2. we can open multiple resources using try-with-resources block 
+
+		try(
+			FileWriter fw = new FileWriter("file1.txt");
+			FileWriter fw2 = new FileWriter(file2.txt");
+		){
+
+			//write the code to perform operations with fw, fw1
+		}catch(....){}
+		
+*==> all network or db related or file IO related resources implement AutoClosable interface
+
+*==> Seriablizable / Closable / AutoClosable etc.
+
+
+
+	3. multiple Exception catching
+	--------------------------------
+
+		in java 1.6
+		-----------------
+		try{
+	
+		}catch(ArithmeticExeption e){
+
+		}catch(ArrayIndexOutOfBoundsException e){
+	
+		}catch(NumberFormatException e){
+
+		}catch(Exception e){
+
+		}
+
+
+		in java 7
+		-----------------
+		try{
+	
+		}catch(NullPointerException | ArithmeticExeption | ArrayIndexOutOfBoundsException e ){
+
+		}
+
+
+Input / Output | IO Pacakge
+-----------------------------------
+
+	-> java uses the concept of "Streams" to perform input/output operations
+
+	-> "stream" is simply sequence of bytes 
+
+	-> java.io package provides diff classes which represent diff kind of "Streams"
+
+		1. open the "Stream"
+		2. perform i/o operations using "Stream"
+		3. close the "Stream"
+
+	-> all the stream classes are divided into two categories
+
+		a. Byte Stream classes
+			-> used to perform I/O operations on bytes
+		
+		b. Character stream classes
+			-> used to perform I/O operations on characters 
+			-> read/write data character by character
+
+*==> Keyboard input operations
+---------------------------------------
+
+	1. using Scanner class 
+
+
+	2. using DataInputStream class
+
+		DataInputStream dis = new DataInputStream(System.in);
+		
+		System.out.println("Enter some Text :" );
+		String st1  = dis.readLine();
+		
+		System.out.println("enter any number :");
+		int no = Integer.parseInt(dis.readLine());
+		
+	3. using InputStreamReader class
+
+		InputStreamReader isr = new InputStreamReader(System.in);
+		BufferedReader br = new BufferedReader(isr);
+		
+		System.out.println("Enter some Text :" );
+		String st1  = br.readLine();
+		
+		System.out.println("enter any number :");
+		int no = Integer.parseInt(br.readLine());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

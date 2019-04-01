@@ -116,7 +116,29 @@ public class Main {
 					System.out.println("Account Balance: "+ walletDAO.viewBalance(walletArray, accountNumber));
 					
 				case 3:
+					System.out.println("Enter your account number ");
+					accountNumber = scan.nextInt();
+					System.out.println("Account Balance: "+ walletDAO.viewBalance(walletArray, accountNumber));
 					
+					System.out.println("Enter the account number of the account you want to transfer funds ");
+					int accountNumber2 = scan.nextInt();
+					
+					System.out.println("Enter the amount you want to transfer: ");
+					double transferAmount = scan.nextDouble();
+					
+					for(Wallet wallet: walletArray){
+						
+						Wallet account1, account2;
+						if(wallet.getCustomer().getAccountNumber() == accountNumber){
+							account1 = wallet;
+						}
+						if(wallet.getCustomer().getAccountNumber() == accountNumber2){
+							account2 = wallet;
+						}
+						
+						walletDAO.transfer(account1, account2, transferAmount)
+					}
+						
 				case 4:
 					System.out.println("How much would you like to withdraw from your account?");
 					double withdrawl = scan.nextDouble();
