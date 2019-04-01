@@ -46,7 +46,7 @@ public class Customer {
 		this.fullName = fullName;
 	}
 
-	public int getDeposit() {
+	public double getDeposit() {
 		return deposit;
 	}
 

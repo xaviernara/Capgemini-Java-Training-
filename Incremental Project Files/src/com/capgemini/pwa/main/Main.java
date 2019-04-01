@@ -27,9 +27,10 @@ public class Main {
 
 		String wantAccount = scan.nextLine();
 
-		if (wantAccount == "yes") {
+		if (wantAccount.equalsIgnoreCase("yes")) {
 			System.out.println("How many accounts do you wanna create: ");
-		} else {
+		} 
+		else{
 			System.out.println("Have a nice day!!!");
 		}
 
@@ -128,7 +129,8 @@ public class Main {
 					
 					for(Wallet wallet: walletArray){
 						
-						Wallet account1, account2;
+						Wallet account1 = new Wallet();
+						Wallet account2 = new Wallet();
 						if(wallet.getCustomer().getAccountNumber() == accountNumber){
 							account1 = wallet;
 						}
@@ -136,7 +138,7 @@ public class Main {
 							account2 = wallet;
 						}
 						
-						walletDAO.transfer(account1, account2, transferAmount)
+						walletDAO.transfer(account1, account2, transferAmount);
 					}
 						
 				case 4:
@@ -158,6 +160,8 @@ public class Main {
 			System.out.println("Your account was not found please try again.");
 			
 		}
+		
+		scan.close();
 
 	}
 
