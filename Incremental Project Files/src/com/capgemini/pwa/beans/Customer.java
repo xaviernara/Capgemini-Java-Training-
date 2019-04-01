@@ -3,6 +3,8 @@
  */
 package com.capgemini.pwa.beans;
 
+import java.util.Random;
+
 /**
  * @author xarichar
  *
@@ -12,12 +14,13 @@ public class Customer {
 	private String dateOfBirth;
 	private long SSD;
 	private String fullName;
-	private int deposit;
+	private double deposit;
 	private int phoneNumber;
 	private String email;
 	private String password;
 	private int accountNumber;
 	private String userName;
+	
 	
 	public String getDateOfBirth() {
 		return dateOfBirth;
@@ -91,8 +94,8 @@ public class Customer {
 		this.userName = userName;
 	}
 
-	public Customer(String dateOfBirth, long SSD, String fullName, int deposit, int phoneNumber, String email, String password, int accountNumber, String userName) {
-		super();
+	public Customer(String dateOfBirth, long SSD, String fullName, double deposit,int phoneNumber, String email, String password, String userName) {
+		Random random = new Random();
 		this.dateOfBirth = dateOfBirth;
 		this.SSD = SSD;
 		this.fullName = fullName;
@@ -100,7 +103,7 @@ public class Customer {
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 		this.password = password;
-		this.accountNumber = accountNumber;
+		this.accountNumber = ((int)(Math.random()*(1000 - 9999))+1000); //generates random account number between 1000 and 9999 
 		this.userName = userName;
 	}
 

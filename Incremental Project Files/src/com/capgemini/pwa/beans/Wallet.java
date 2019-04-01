@@ -4,7 +4,7 @@ public class Wallet {
 
 	
 
-	private int balance;
+	private double balance;
 	private Customer customer;
 	private String accountType;
 
@@ -19,8 +19,8 @@ public class Wallet {
 	}
 
 
-	public void setBalance(int balance) {
-		this.balance = balance;
+	public void setBalance(double newBalance) {
+		this.balance = newBalance;
 	}
 
 
@@ -53,7 +53,7 @@ public class Wallet {
 	 * Given the account holding user, the user is able to see the available
 	 * balance in his/her own account.
 	 */
-	public int viewBalance(){
+	public double getBalance(){
 		return balance;
 	}
 
@@ -67,13 +67,9 @@ public class Wallet {
 
 	@Override
 	public String toString() {
-		return String.format(String.format("%-15s %-15s %-15s",balance,customer,accountType)
+		return String.format(String.format("%-15s %-30s %-15s",balance,customer,accountType));
 	}
 
 
-
-	public Wallet() {
-		// TODO Auto-generated constructor stub
-	}
-
+	
 }
