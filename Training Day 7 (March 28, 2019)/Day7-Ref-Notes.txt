@@ -15,12 +15,22 @@
 ---------------
 
 	1. equality contract 
+		=>1.It is REFLEXIVE: For any reference value x, x.equals(x) must return true.
+		=>2.It is SYMMETRIC: For any reference values x and y, x.equals(y) must return true if and only if y.equals(x) returns true.
+		=>3.It is TRANSIVTE: For any reference values x, y, and z, if x.equals(y) returns true and y.equals(z) returns true, then x.equals(z) must return true.
+		=>4.It is CONSISTENT: For any reference values x and y, multiple invocations of x.equals(y) consistently return true or consistently return false, 
+			provided no information used in equals() comparisons on the object is modified. 
+		=>5.For any NON-NULL reference value x, x.equals(null) must return false.
 
 	2. equals() and hashCode()
+		=>When the equals() method is overridden, the hashCode() method must be overridden as well.
+		=>If two objects are equal, their hash codes must be equal as well.
+		=>If two objects have identical hash codes, there’s no constraint on their equality (they can be equal or not).
+		=>If two objects have different hash codes, they must not be equal.
 
 	3. equals() and Comparable/Comparator
 
-		=> If two objects are considered equal by the equals operation, then try to 			make those objects must equal by the Comparable or Comparator test.
+		=> If two objects are considered equal by the equals operation, then try to make those objects must equal by the Comparable or Comparator test.
 
 ============================================================
 

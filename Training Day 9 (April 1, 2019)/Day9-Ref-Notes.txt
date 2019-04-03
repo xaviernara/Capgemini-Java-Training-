@@ -8,7 +8,7 @@
 
 Exception Handling
 -----------------------------------
-	-> unwanted/unexpected event that disturbs the normal flow the program is called 		Exception
+	-> unwanted/unexpected event that disturbs the normal flow the program is called Exception
 
 1. compile time errors
 

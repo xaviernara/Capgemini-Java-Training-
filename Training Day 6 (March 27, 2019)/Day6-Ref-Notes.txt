@@ -327,7 +327,7 @@ Comparable interface
 
 		}
 
-	comparevalue
+	compare value
 	--------------------
 
 		>1	: this object is greater than other
