@@ -1,0 +1,171 @@
+
+==============================
+
+==> explore NIO package
+
+==============================
+
+InputStreamReader and OutputStreamWriter
+
+
+FileReader and FileWriter
+
+
+BufferedReader and BufferedWriter
+
+
+
+Byte based stream classes
+------------------------------------
+
+FileInputStream	and FileOutputStream
+
+
+BufferedInputStream and BufferedOutputStream
+
+
+DataInputStream and DataOutputStream
+--------------------------------------------
+	-> these stream classes are called as Formatted Data Stream classes
+	-> used to perform read/write operations on primitive data and strings
+
+
+	.readInt()		.writeInt()
+	.readDouble()		.writeDouble()
+	.readLine()		.write()
+	.readUTF()		.writeUTF()
+	.readXXX()		.writeXXX()
+
+ObjectInputStream and ObjectOutputStream
+-----------------------------------------------
+
+	-> read/write objects to/from the streams
+	*-> the objects must be serializable
+
+
+*=> Serialization
+------------------------------
+	-> Serialization is the process of converting an object into sequence of 		bytes
+	-> it converts state of an object into byte stream
+
+	-> to make an object serializable, we need to implmenet "Serializable" 				interface
+
+
+	-> Serializable is a "Marker interface"
+
+		class XXXX implements Serializable {
+
+		}
+
+*=>SerialVersionUID
+-------------------------------
+
+
+
+
+
+Multithreading / Multitasking
+-------------------------------
+
+	-> executing several tasks simultaneously
+
+
+	1. process based multitasking
+
+
+
+	2. thread based multitasking
+		-> executing diff parts of the same process simultaneously
+		-> sub process / part 
+
+
+Thread Scheduler
+----------------------
+	-> TS is a part of JVM, responsible to schedule the execution of threads
+
+
+main	t1	t2	t3	t4	t5
+
+
+Thread Class
+-----------------------
+
+
+
+How to create a new thread
+---------------------------------
+
+	1. by extending Thread class
+	
+		class MyThread extends Thread{
+			//override run() method
+			public void run(){
+				
+				//code
+			}
+
+		}
+
+		MyThread mythread1 = new MyThread();
+		mythread1.start();
+
+	2. by implementing Runnable interface 
+
+		class MyRunnable implements Runnable {
+			
+			public void run() {
+
+			}
+		}
+
+
+Thread class constructors
+--------------------------------
+
+	new Thread()
+
+	new Thread(Runnable target)
+
+	new Thread(Runnable target, String name)
+
+
+How to pause a thread
+----------------------------
+
+	Thread.sleep(30000);
+
+	*==> you can't pause a thread from another thread
+	*==> only the thread itself can pause its execution
+
+	*==> a sleeping thread can be interrupted by another thread
+
+
+How to interrupt a thread
+-----------------------------
+
+	t1.interrupt()
+
+	-> we can stop or resume the execution of a thread 
+
+
+How to make a thread wait for other thread
+-------------------------------------------------
+
+
+
+
+
+
+
+	.start()
+	    -> registers the thread with the thread scheduler
+	    -> perfoms many other operations
+	    -> invokes the run()
+
+
+
+
+
+
+
+

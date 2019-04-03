@@ -24,10 +24,10 @@ public class ExceptionHandling1 {
 			BufferedReader br = new BufferedReader(isr);
 
 			System.out.println("Enter the total runs scored: ");
-			int totalRunsScored = Integer.parseInt(br.readLine());
+			double totalRunsScored = Integer.parseInt(br.readLine());
 			
 			System.out.println("Enter the total overs faced");
-			int totalOversFaced = Integer.parseInt(br.readLine());
+			double totalOversFaced = Integer.parseInt(br.readLine());
 			
 			rate = totalRunsScored/totalOversFaced;
 			System.out.println("Current Run Rate : " +rate);

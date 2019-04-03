@@ -1,0 +1,141 @@
+======================================
+
+
+	=> JAR / WAR files
+
+
+=========================================
+
+
+
+
+
+Convert java object to json
+------------------------------
+
+	1. download the gson.jar library
+
+	2. configure the build path and add the external .jar file to the project
+
+	3. use the Gson library to perform convertion
+
+
+
+Use jUnit to write test cases
+---------------------------------------------
+
+	1. download the junit.jar file
+
+	2. configure the build path and add the external .jar file to the project
+
+
+
+	junit.jar provides many interfaces and classes to perform testing
+	
+		Assert class
+
+			void assertEquals()
+			void assertTrue()
+			void assertFalse()
+			void assertNull()
+			void assertNotNull()
+
+		Test
+
+		Before
+
+		After
+
+Maven / Gradle
+------------------------------
+	-> maven/gradle dependency management tools / Project management tool
+
+	-> maven/gradle helps to create/build/test application/project
+
+	-> maven/gradle simplifies the build process
+
+
+Install maven
+-------------------------
+
+	-> download maven and extract it
+
+	-> set the env. variable 
+		MAVEN_HOME	...mavendirectory
+
+	> mvn -v
+
+
+Maven Respositories
+---------------------------
+	1. local repository
+	2. Central repository
+	3. Remote repository
+
+
+Create Maven Project
+------------------------------
+
+
+
+Multithreading.....
+----------------------------------------------
+
+
+==> multitasking --- process based / thread based
+
+==> how to create threads
+
+	-> by extending Thread class
+	-> by implementing Runnable interface
+
+=> Thread Priority
+
+=> sleep() / interrupt() / join()
+
+==> synchronization
+
+==> wait() notify() and notifyAll() methods
+
+	-> these methods belog to Object class
+	-> wait() notify() notifyAll() methods must be called from a synchronized method / 			block
+	
+
+
+	ArrayList/LinkedList ====> not thread-safe
+
+	Collections.synchronizedList(list) ======> thread-safe / but few limitations
+					   =====> multiple threads cannot iterate at a time 
+
+	CopyOnWriteArrayList
+
+
+
+
+
+	HashSet/LinkedHashSet/TreeSet   ====> not thread-safe
+
+	Collections.synchronizedSet(set)   ======> thread-safe / but few limitations
+					   =====> multiple threads cannot iterate at a time 
+
+
+	CopyOnWriteArraySet		
+
+	
+
+	HashMap / LinkedHashMap	 ====> not thread-safe
+
+	Collections.synchronizedMap(map)  ======> thread-safe / but few limitations
+					  =====> multiple threads cannot iterate at a time 
+
+	ConcurrentHashMap	
+	
+
+	HashTable		 ======> thread-safe / but few limitations
+				  =====> multiple threads cannot iterate at a time 
+
+
+
+
+
+
