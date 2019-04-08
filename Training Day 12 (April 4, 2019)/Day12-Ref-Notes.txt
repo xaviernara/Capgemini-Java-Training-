@@ -1,0 +1,265 @@
+
+language fundamentals
+	- variables/data types/control flow/arrays/strings/
+	- OOPS concepts
+APIs
+	- collection framework / io / 
+
+Multithreading
+
+
+ODBC 
+----------------------
+	- open database connectivity
+	- microsoft introducted ODBC
+	- not db vendor specific
+	- not all the db system supported odbc
+
+JDBC API
+------------------
+	-> java database connectivity
+	-> jdbc api helps to communicate with backend/db systems
+
+	-> JDBC API is just a "specification"
+
+	-> every db vendor / db system, who wants java app to communicate with their db 		systems, they have to implement the jdbc api specifications, and create a .jar 		file containining all the implementations 
+
+
+
+	DriverManager
+		-> responsible to manage the drivers
+
+	Driver
+		-> responsible to communicate with the database
+
+	Connection
+		-> represents the connection with the database
+
+	Statement
+		-> used to submit the sql commands to the db system
+
+	ResultSet
+		-> used to represent the table of data fetched from the database
+
+	SQLException
+		-> represents the exception occured during runtime
+	...
+
+
+java.sql package contains all the interfaces/classes 
+
+
+Oracle		ojdbcXXX.jar
+
+mysql		mysql-connectionxxxx.jar
+
+
+Four types of Drivers
+-------------------------------
+
+1. Type I driver (JDBC-ODBC Bridge driver)
+
+	-> a JDBC bridge is used to access ODBC driver, and using ODBC we communicate to the 		targe db system
+	-> jdbc calls are converted to odbc calls, then odbc calls are converted to db 		specific calls
+
+
+		advantages
+			- single driver implementation used to connect with diff db systems
+			- it is vendor independent 
+
+		disadvantages
+			- performance issue
+			- not good for web applications / client-server architectures
+			- configuration is required on all clients/systems
+
+
+2. Type II driver (Native API)
+
+	-> we can use the native api/libraries (C &C ++) provided by the db vendors
+
+		advantages
+			- good in performance compared to type I
+			- vendor specific
+
+		disadvantages
+			- migration from one db to another db is difficult
+			- not thread-safe
+			- if any bug, since they are written in c & c++, JVM cannot handle it
+
+3. Type III driver (JDBC-NET driver)
+
+	- uses a middleware to communicate with the db
+
+		advantages
+			- usefull for 3-tier applciations / client-server apps
+			- optimize portability, performance, scalability....
+
+		disadvantages
+			- costly
+
+4. Type IV driver (Thin Driver / Pure java driver)
+	
+	-> db vendors implements the jdbc api, using their .jar / library / api we connect to 			the db systems
+	-> completely written using java
+	-> directly interact with the db
+
+
+How to connect to a database
+--------------------------------------------
+
+	1. Load the driver
+
+		Class.forName("thedriverclassyouwanttoload");
+
+	2. create Connection
+
+		DriverManager.getConnection(String dburl, String uname, String pass);
+
+	3. create Statement object
+
+		- there are three type of Statement objects...
+
+		a. Statement
+			
+			con.createStatment();
+
+		b. PreparedStatement 
+			
+			con.prepareStatment(String sql);
+
+		c. CallableStatement 
+		
+			con.prepareCall(String sql);
+
+	4. execute the statement 
+
+		- using below methods (of Statement object) we can submit/execute the sql 			commands
+
+		1. int executeUpdate(String sql)
+
+			- INSERT/UPDATE/DELETE operations
+			- return a number representing number of row affected by the query
+
+		2. ResultSet executeQuery(String sql)
+		
+			- SELECT operations
+			- returns an object of ResultSet, which represents the table data 				fetched from the database
+
+		3. boolean execute(String sql)
+		
+			- used to submit/execute any sql command
+
+	5. close the connection
+
+
+
+
+		Drivername			urlformat
+
+oracle		oracle.jdbc.OracleDriver	jdbc:oracle:thin@localhost:1521:xe
+
+mysql		com.mysql.jdbc.Driver		jdbc:mysql://localhost/dbname
+
+db2		com.ibm.db2.jdbc.net.DB2Driver
+
+odbc		sun.jdbc.odbc.JdbcOdbcDriver
+
+
+
+How Statement works
+------------------------------
+	-> the sql commands gets compiled every time by the db
+	-> cannot submit/transfer any binary info to the db
+	-> fileupload / file store... 
+
+		con.createStatement();
+
+How PreparedStatment works
+------------------------------------
+
+	con.prepareStatement(String sql)
+
+	-> represets precompiled queries 
+
+CallableStatment
+-------------------------------
+
+
+ResultSet
+-------------------
+	- represents the table of data fetched from the db
+	- it has a cursor, which by default points to the row before 1st row
+	- .next() advances the cursor to next row, and returns true if next record found
+	- using getXXX() methods we can read the data from the columns 
+	
+		
+	--->	1	vishal	   	pune		3000
+		2	Luies 		pune		3000
+		2	Maaz		pune		3000
+		.....
+		
+		
+	*=> by default ResultSet cursor can move only in forward direction
+	*=> by default ResultSet is read-only
+
+
+ResultSet Types & ResultSet Concurrency
+--------------------------------------------
+
+	ResultSet Types
+	------------------
+		ResultSet.TYPE_FORWARD_ONLY
+
+		ResultSet.TYPE_SCROLL_SENSITIVE
+			*=> the ResultSet is sensitive to the changes in the underlying data 				source while the resultset is open
+
+		ResultSet.TYPE_SCROLL_INSENSITIVE
+
+	ResultSet Concurrency
+	---------------------------
+		
+		ResultSet.CONCUR_READ_ONLY
+	
+		ResultSet.CONCUR_UPDATABLE
+
+
+	con.createStatement(int ResultSet_type, int ResultSet_concurrency);
+
+	con.prepareStatement(String sql, int ResultSet_type, int ResultSet_concurrency);
+
+	con.prepareCall(String sql, int ResultSet_type, int ResultSet_concurrency);
+
+
+
+ResultSet navigation methods
+-------------------------------------------------
+
+	.next()
+
+	.previous()
+
+	.first()
+
+	.last()
+
+	.beforeFirst()
+
+	.afterLast()
+
+	.absolute(int)
+
+	.relative(int)
+
+
+
+
+
+
+
+
+
+
+
+
+
+

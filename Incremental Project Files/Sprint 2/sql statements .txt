@@ -1,0 +1,72 @@
+Creating a Connection:
+
+String URL = "jdbc:oracle:thin:@amrood:1521:EMP";
+String USER = "username";
+String PASS = "password"
+Connection conn = DriverManager.getConnection(URL, USER, PASS);
+
+------------------------------------------------------------------
+Statements:
+
+	1. View All Accounts:
+		public int executeQuery("SELECT name, ssd, accountNumber, dob FROM walletTable");
+
+			- Executes a SELECT statement and returns a ResultSet object which contains results returned by the query.
+
+	2. View 1 account:
+		public int executeQuery("SELECT name, ssd, accountNumber, dob FROM walletTable where accountNumber = 'getCustomer().getAccountNumber()' ");
+
+			- Executes a SELECT statement and returns a ResultSet object which contains results returned by the query.
+
+	3.Create Account (Sign Up):
+		public int executeUpdate("INSERT INTO walletTable (name,dob,ssd,password,email,accountNumber) 
+		VALUES (name,dob,ssd,password,email,accountNumber)");	
+
+			-Executes an INSERT, UPDATE or DELETE statement and returns an update account indicating
+				number of rows affected (e.g. 1 row inserted, or 2 rows updated, or 0 rows affected).
+
+	4.Validate Login
+		public int execute("SELECT passowrd, email FROM walletTable WHERE password = 'getCustomer().getPassword()' AND  userName = 'getCustomer().getUserName()' ");
+
+			-executes a general SQL statement. It returns true if the query returns a ResultSet, false if the query returns an update count or returns nothing. 
+				This method can be used with a Statement only.
+
+	5.Add funds
+		public int executeUpdate("INSERT INTO walletTable (balance) VALUES ( 'wallet.getBalance() + newMoney' ) WHERE password = 'getCustomer().getPassword()' AND  userName = 'getCustomer().getUserName()");	
+			
+		 	-Executes an INSERT, UPDATE or DELETE statement and returns an update account indicating
+				number of rows affected (e.g. 1 row inserted, or 2 rows updated, or 0 rows affected).		
+	
+
+	6.Delete Account
+		public int executeUpdate("DELETE FROM walletTable WHERE  password = 'getCustomer().getPassword()' AND  userName = 'getCustomer().getUserName()'");	
+			
+		 	-Executes an INSERT, UPDATE or DELETE statement and returns an update account indicating
+				number of rows affected (e.g. 1 row inserted, or 2 rows updated, or 0 rows affected).	
+
+	7.Transfer
+		public int executeQuery("SELECT balance FROM walletTable where accountNumber = 'getCustomer().getAccountNumber1()' ");
+
+		public int executeQuery("SELECT balance FROM walletTable where accountNumber = 'getCustomer().getAccountNumber2()' ");
+
+			
+			- Executes a SELECT statement and returns a ResultSet object which contains results returned by the query.
+
+
+		public int executeUpdate("UPDATE balance FROM walletTable VALUES ( 'wallet.getBalance2() + transferedMoneyFromWallet1' ) WHERE where accountNumber = 'getCustomer().getAccountNumber2()'");
+		
+		public int executeUpdate("INSERT INTO walletTable (balance) VALUES ( 'wallet.getBalance1() - transferedMoneyToWallet2' ) where accountNumber = 'getCustomer().getAccountNumber1()' ");
+		
+			
+			-Executes an INSERT, UPDATE or DELETE statement and returns an update account indicating
+				number of rows affected (e.g. 1 row inserted, or 2 rows updated, or 0 rows affected).	
+
+
+	8. Validate Sign Up
+		public int execute("SELECT passowrd, email FROM walletTable WHERE password = 'getCustomer().getPassword()' AND  userName = 'getCustomer().getUserName()' ");
+			
+			-executes a general SQL statement. It returns true if the query returns a ResultSet, false if the query returns an update count or returns nothing. 
+				This method can be used with a Statement only.
+
+	
+

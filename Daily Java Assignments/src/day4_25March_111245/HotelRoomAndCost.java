@@ -30,30 +30,33 @@ public class HotelRoomAndCost {
 		
 		System.out.println("Room has TV (yes/no): ");
 		String tv = scan.nextLine();
-		
-		if (tv == "yes"){
+		if (tv.equalsIgnoreCase("yes")){
 			hasTV = true;
 		}
 		
 		System.out.println("Room has Wifi (yes/no: ");
 		String wifi = scan.nextLine();
-		if (tv == "yes"){
+		if (wifi.equalsIgnoreCase("yes")){
 			hasWifi = true;
 		}
-		
+		int tarrif;
 		switch(roomType){
 		
 		case 1:
 			DeluxeRoom deluxeRoom = new DeluxeRoom (hotelName,roomSquareFeetArea,hasTV,hasWifi);
-			System.out.println("Room Tariff per day is: " + deluxeRoom.getRatePerSqFeet());
-			
+			tarrif = deluxeRoom.calculateTariff(deluxeRoom.getRatePerSqFeet());
+			System.out.println("Room Tariff per day is: " + tarrif);
+			break;
 		case 2:
 			DeluxeACRoom deluxeACRoom = new DeluxeACRoom (hotelName,roomSquareFeetArea,hasTV,hasWifi);
-			System.out.println("Room Tariff per day is: " + deluxeACRoom.getRatePerSqFeet());
-			
+			tarrif = deluxeACRoom.calculateTariff(deluxeACRoom.getRatePerSqFeet());
+			System.out.println("Room Tariff per day is: " + tarrif);
+			break;
 		case 3:
 			SuiteACRoom suiteACRoom = new SuiteACRoom (hotelName,roomSquareFeetArea,hasTV,hasWifi);
-			System.out.println("Room Tariff per day is: " + suiteACRoom.getRatePerSqFeet());
+			tarrif = suiteACRoom.calculateTariff(suiteACRoom.getRatePerSqFeet());
+			System.out.println("Room Tariff per day is: " + tarrif);
+			break;
 		}
 		
 		scan.close();
@@ -70,12 +73,7 @@ class HotelRoom{
 	protected Boolean hasTV;
 	protected Boolean hasWifi;
 	
-	public HotelRoom(String hotelName, Integer numberOfSqFeet, Boolean hasTV, Boolean hasWifi) {
-		this.hotelName = hotelName;
-		this.numberOfSqFeet = numberOfSqFeet;
-		this.hasTV = hasTV;
-		this.hasWifi = hasWifi;
-	}
+	
 	public String getHotelName() {
 		return hotelName;
 	}
@@ -101,8 +99,8 @@ class HotelRoom{
 		this.hasWifi = hasWifi;
 	}
 
-	public Integer calculateTariff(){
-		return numberOfSqFeet;
+	public Integer calculateTariff(int RatePerSqFeet){
+		return numberOfSqFeet * RatePerSqFeet;
 		
 	}
 	
@@ -110,6 +108,12 @@ class HotelRoom{
 		return 0;
 	}
 	
+	public HotelRoom(String hotelName, Integer numberOfSqFeet, Boolean hasTV, Boolean hasWifi) {
+		this.hotelName = hotelName;
+		this.numberOfSqFeet = numberOfSqFeet;
+		this.hasTV = hasTV;
+		this.hasWifi = hasWifi;
+	}
 	
 	
 }
@@ -119,7 +123,6 @@ class DeluxeRoom extends HotelRoom{
 	
 	
 	protected Integer ratePerSqFeet;
-	
 	
 	public DeluxeRoom(String hotelName, Integer numberOfSqFeet, Boolean hasTV, Boolean hasWifi) {
 		super(hotelName, numberOfSqFeet, hasTV, hasWifi);
@@ -166,7 +169,7 @@ class SuiteACRoom extends HotelRoom{
 		if(super.hasWifi){
 			return ratePerSqFeet +2;
 		}
-		return ratePerSqFeet+2;
+		return ratePerSqFeet;
 	}
 	
 }

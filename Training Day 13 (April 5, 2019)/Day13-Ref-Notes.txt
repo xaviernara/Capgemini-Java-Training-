@@ -1,0 +1,180 @@
+JDBC API
+------------------
+
+-> Transaction
+---------------------------
+
+	-> transfer amount from one account to another account
+
+		1. withdraw amount from account 1	---> success
+		2. deposit amount to account 2		---> exception occurs
+
+Problems with JDBC
+-------------------------
+	- Java object Model
+		- uses principals of abstraction, encapsulation, modularity, hierarchy, 						polymorphism, concurrency, 
+		- identity 
+		- equality
+		- an object is an intance of a class
+
+	- Relational data Model
+		- every rdbms has two fundamentals rules
+			a. Entity Integrity
+			b. Referencial Integrity
+		- data is organized in the form of tables, diff tables are associated with each 					other by referencial integrity
+
+	- too many sql statements 
+	- manually handle the associations
+	- too many copy codes
+	- database dependent
+
+
+
+	- ResultSet object has a cursor, and by default the cursor point to row before 1st row
+	- .next() advances the cursor to the next row.. if the row found it retruns true	
+	- using getXXX(columnNumber) / getXXX(columnName) you can fetch values from the row
+
+
+	- by default ResultSet moves only in forward direction
+
+
+Solutions to these problems are....
+-----------------------------------------
+	-> use ORM tools
+	-> ORM refers to the technique of mapping the representations of java objects to relational 		databases
+	-> helps mapping the pojos with db tables
+	-> these mappings are configured using xml or java annotations
+	-> hides the complexity to deal with sql and low level jdbc api
+	-> it writes the sql and jdbc code for you...
+
+		
+ORM - object relation maping
+-------------------------------
+	- hibernate
+	- ibatis
+	- toplink
+	....
+	....
+
+Hibernate
+-------------------------------
+
+	- hibernate is a ORM tool to map java objects to relational tables
+	- allows to specify the configuration to use to connect with the database and to specify the way 		java object should be mapped witht the relational tables
+
+	- these configurations are specified either by using xml or annotations
+
+	- hibernate provides "Session" object, which represents the conversation between our app and db
+	- the "Session" object is used to persist the data
+	- the "Session" object comes from "SessionFactory", which is built by the configuration..
+	
+1. create the hibernate configuration file
+-------------------------------------------------
+
+	hibernate.cfg.xml
+	-----------------------
+		// specifiy the properties to connect to db
+		
+		<hibernate-configuration>
+			<session-factory>
+				<property name="connection.driver_class">.....</property>
+				<property name="connection.url"> ......... </property>
+				<property name="connection.username"> ....... </property>
+				<property name="connection.password"> ...... </property>
+
+				<property name="dialect">org.hibernate.dialect.OracleDialect</property>
+				
+				<mapping resource="domain/message-mapping.hbm.xml"/> 
+				
+			</session-factory>
+		</hibernate-configuration>
+
+
+---------------------------------------------------------------------------------------------------
+2. create the mapping file
+
+	message-mapping.hbm.xml
+	----------------------------
+		// specify the properties to map java object to tables
+
+
+	<hibernate-mapping>
+		<class name="Message" package="com.capg.beans">
+			<id name="id" column="id">
+				
+			</id>
+			<property name="text" column="text" type="string" />
+		</class>	
+		
+	</hibernate-mapping>
+
+
+3. add the hibernate jar files to the build path
+
+
+4. obtain SessionFactory object
+
+5. obtain Session object
+
+
+
+hibernate methods to perform crud operations
+------------------------------------------------
+
+	.save(entity)
+	.delete(entity)
+	.get(Class, ID)
+	// use setter methods to perfom update
+
+
+https://github.com/suhvishal/usgrad
+
+
+
+================================================
+---> Beans/pojo/BO vs Entities
+===================================================
+
+
+
+
+
+
+
+
+
+
+	    Specifications					implementation
+
+		JPA					Hibernate JPA / EclipsLink / MyBatis....
+		
+	   - interfaces					  - concrete classes that implement some 								interfaces
+	   - set of requirements..
+
+
+
+
+
+
+
+--------------------------------------------------------------------
+Hibernate / JPA / Hibernate JPA / Spring Data / Spring Data JPA
+-----------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

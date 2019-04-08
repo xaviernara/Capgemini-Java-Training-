@@ -5,6 +5,8 @@
 
 ==============================
 
+Character based stream classes
+------------------------------------
 InputStreamReader and OutputStreamWriter
 
 
@@ -45,10 +47,10 @@ ObjectInputStream and ObjectOutputStream
 
 *=> Serialization
 ------------------------------
-	-> Serialization is the process of converting an object into sequence of 		bytes
+	-> Serialization is the process of converting an object into sequence of bytes
 	-> it converts state of an object into byte stream
 
-	-> to make an object serializable, we need to implmenet "Serializable" 				interface
+	-> to make an object serializable, we need to implmenet "Serializable" interface
 
 
 	-> Serializable is a "Marker interface"
@@ -59,7 +61,9 @@ ObjectInputStream and ObjectOutputStream
 
 *=>SerialVersionUID
 -------------------------------
-
+	->The serialization runtime associates with each serializable class a version number
+	->used during deserialization to verify that the sender and receiver of a serialized object have loaded classes 
+		for that object that are compatible with respect to serialization
 
 
 
@@ -150,13 +154,6 @@ How to interrupt a thread
 
 How to make a thread wait for other thread
 -------------------------------------------------
-
-
-
-
-
-
-
 	.start()
 	    -> registers the thread with the thread scheduler
 	    -> perfoms many other operations

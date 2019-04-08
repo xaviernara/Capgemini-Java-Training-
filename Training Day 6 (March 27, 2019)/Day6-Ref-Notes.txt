@@ -31,7 +31,7 @@ Standard libraries/ packages / apis
 ---------------------------------------------
 
 *=> Collection Framework api
-----------------------------------
+	----------------------------------
 
 	-> provides data structures to create dynamically allocated group of objects 
 	-> java.util package provides all interfaces, and their implementaion classes
@@ -64,7 +64,7 @@ Stack<E>						|
 
 Collection<E> interface
 -------------------------------
-	-> the supermost interface in the collection hierarchy, which describes some common 			methods
+	-> the supermost interface in the collection hierarchy, which describes some common methods
 
 		public boolean add(Object o)
 		public boolean addAll(Collection c)
@@ -303,7 +303,8 @@ Operations on set
 	3. iterating element 
 	4. searching elemnet 	
 
-	*=> whenever we use any hashtable based collection, for storing custom objects, make 			sure you correctly override equals() and hashCode() methods
+	*=> whenever we use any hashtable based collection, for storing custom objects, make 
+		sure you correctly override equals() and hashCode() methods
 
 
 
@@ -334,7 +335,6 @@ Comparable interface
 
 		<1	: this object is less than other
 
-	
 		=0	: both objects are same
 
 

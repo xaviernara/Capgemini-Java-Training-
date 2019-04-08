@@ -41,13 +41,13 @@ runtime stack mechanism
 --------------------------
 	1. for every thread JVM will creates a runtime stack
 
-	2. every method call performed by that thread, will be stored in the corresponding 			stack
+	2. every method call performed by that thread, will be stored in the corresponding stack
 		-> every entry in the stack is called 'ActivationRecord / Stack Frame'
 
 	3. during execution, if an Exception raised at any point, then 
-		the method will create 'Exception object' and it hand overs that Exception 		object to JVM
+		the method will create 'Exception object' and it hand overs that Exception object to JVM
 
-	4. JVM checks whether the method contains any exception handling code, then it passes 		the exception object to the corresponding catch block otherwise
+	4. JVM checks whether the method contains any exception handling code, then it passes the exception object to the corresponding catch block otherwise
 		it terminates the caller method and removes the entry from the stack
 
 
@@ -87,7 +87,7 @@ Exception class hierarchy
 		i.e. FileNotFoundException , IOException, ArithmeticException etc.
 
 *==> Exceptions are objects, when you throw an Exception, you throw an object
-		i.e. you can not throw any object, you can throw only those objects who are 			descendant of Throwable
+		i.e. you can not throw any object, you can throw only those objects who are descendant of Throwable
 
 
 
@@ -98,8 +98,8 @@ Checked and Unchecked Exceptions
 
 *=> Checked Exception
 
-	-> the exceptions which are checked by the compiler for smooth execution fo the 		program
-	-> you must handle the checked exception at your own, otherwise you need to declare it 		to be thrown
+	-> the exceptions which are checked by the compiler for smooth execution fo the program
+	-> you must handle the checked exception at your own, otherwise you need to declare it to be thrown
 
 	-> all the exceptions except RuntimeException are checked 
 
@@ -158,10 +158,6 @@ How to handle Exceptions
 
 	  d. try--finally
 	  -----------------------------------
-
-
-	  
-
 
 
 

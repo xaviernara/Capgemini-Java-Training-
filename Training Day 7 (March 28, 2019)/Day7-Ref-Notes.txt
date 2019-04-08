@@ -77,7 +77,7 @@ Map<K,V> Interface
 
 	-> models a collection of objects, stored using key-value pairs 
 
-	-> doesn;t allow duplicate keys 
+	-> doesn't allow duplicate keys 
 
 		name-address
 		name-phone
@@ -141,7 +141,7 @@ Implementation classes of Map interface
 
 	4. TreeMap<K,V>
 
-		-> doesn;t allow null key
+		-> doesnt allow null key
 		-> maintains sorted order of key, according to their natural ordering 
 		-> uses 'red black tree' data structure
 
