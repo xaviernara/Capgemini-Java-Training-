@@ -92,11 +92,4 @@ public interface WalletDAO {
 	 * returns boolean if the password and user name match the wallet account or not
 	 */
 	public boolean validateLogin(Wallet[] accounts, String password, String userName);
-	
-	
-	/*
-	 * Deletes customer wallet account from database
-	 */
-	public void deleteAccount(String userName, String password);
-	
 }

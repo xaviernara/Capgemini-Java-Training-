@@ -5,30 +5,24 @@ package com.capgemini.pwa.dao;
 
 import com.capgemini.pwa.beans.Customer;
 import com.capgemini.pwa.beans.Wallet;
-import java.sql.*; // for standard JDBC programs
 
 public class WalletDAOImp implements WalletDAO {
 
-	
 	@Override
-	public double transfer(int accountID1, int accountID2, double transferAmount) {
+	public double transfer(Wallet account1, Wallet account2, double transferAmount) {
 
-		String updateQuery = "";
-//		if (validateTransfer(account1, account2)) {
-//
-//			double deduction = account1.getBalance() - transferAmount;
-//			double transfer = account2.getBalance() + deduction;
-//			account2.setBalance(transfer);
-//			account1.setBalance(deduction);
-//
-//			System.out.println("Your new balance: ");
-//			return account1.getBalance();
-//		}
+		if (validateTransfer(account1, account2)) {
+
+			double deduction = account1.getBalance() - transferAmount;
+			double transfer = account2.getBalance() + deduction;
+			account2.setBalance(transfer);
+			account1.setBalance(deduction);
+
+			System.out.println("Your new balance: ");
+			return account1.getBalance();
+		}
 
 		// if (validateTransfer(account1, account2)) {
-		
-		
-		
 
 		return 0.0;
 
@@ -37,30 +31,16 @@ public class WalletDAOImp implements WalletDAO {
 	@Override
 	public void deposit(Wallet[] account, int accountNumber, double newMoney) {
 
-//		for (Wallet wallet : account) {
-//
-//			if (validateAccountNumber(account, accountNumber)) {
-//				System.out.println("Your balance before deposit: " + wallet.getBalance());
-//				double newBalance = wallet.getBalance() + newMoney;
-//				wallet.setBalance(newBalance);
-//				System.out.println("Your new balance after deposit: " + wallet.getBalance());
-//
-//			}
-//		}
-		
-		
-		String insertQuery = "INSERT INTO walletTable (balance) VALUES ('" + newMoney+ "') WHERE id = '"+accountNumber+ "'";
-		
-		Statement st = con.createStatement();
-		
-		int  i = executeUpdate(insertQuery);	
-		
-		if(i > 0){
-			System.out.println("You founds have been added to your account!");
-		}else{
-			System.out.println("Funds not added!");
+		for (Wallet wallet : account) {
+
+			if (validateAccountNumber(account, accountNumber)) {
+				System.out.println("Your balance before deposit: " + wallet.getBalance());
+				double newBalance = wallet.getBalance() + newMoney;
+				wallet.setBalance(newBalance);
+				System.out.println("Your new balance after deposit: " + wallet.getBalance());
+
+			}
 		}
-		
 
 	}
 
@@ -90,35 +70,20 @@ public class WalletDAOImp implements WalletDAO {
 	}
 
 	@Override
-	public void withdraw(int accountNumber, double withdrawl) {
+	public void withdraw(Wallet[] account, int accountNumber, double withdrawl) {
 
-//		for (Wallet wallet : account) {
-//
-//			if (validateAccountNumber(account, accountNumber)) {
-//				System.out.println("Your new balance before withdrawl: " + wallet.getBalance());
-//
-//				double subtract = wallet.getBalance() - withdrawl;
-//
-//				wallet.setBalance(subtract);
-//
-//				System.out.println("Your new balance after withdrawl: " + wallet.getBalance());
-//			}
-//		}
-		
+		for (Wallet wallet : account) {
 
-		String updateQuery = "UPDATE walletTable SET (balance) = '" + withdrawl+ "') WHERE id = '"+accountNumber+ "'";
-		
-		Statement st = con.createStatement();
-		
-		int  i = executeUpdate(updateQuery);	
-		
-		if(i > 0){
-			System.out.println("You founds have been added to your account!");
-		}else{
-			System.out.println("Funds not added!");
+			if (validateAccountNumber(account, accountNumber)) {
+				System.out.println("Your new balance before withdrawl: " + wallet.getBalance());
+
+				double subtract = wallet.getBalance() - withdrawl;
+
+				wallet.setBalance(subtract);
+
+				System.out.println("Your new balance after withdrawl: " + wallet.getBalance());
+			}
 		}
-		
-		
 	}
 
 	@Override
@@ -229,16 +194,6 @@ public class WalletDAOImp implements WalletDAO {
 
 		System.out.println("Your balance can't be found");
 		return 0;
-	}
-	
-	
-	
-	/*
-	 * Deletes customer wallet account from database
-	 */
-	@Override
-	public void deleteAccount(String userName, String password){
-		
-	}
+	};
 
 }
