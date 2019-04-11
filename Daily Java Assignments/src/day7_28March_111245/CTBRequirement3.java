@@ -2,11 +2,11 @@
  * 
  */
 package day7_28March_111245;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern; 
+import java.util.regex.*;
 
 /**
  * @author xarichar Assignment 23
@@ -16,32 +16,31 @@ public class CTBRequirement3 {
 
 	/**
 	 * @param args
-	 * @throws ParseException 
+	 * @throws ParseException
 	 */
 	public static void main(String[] args) throws ParseException {
-		System.out.println("1.Validate Age \n 2.Validate Name \n 3.Lucky Customer \n Enter your choice:");
+		System.out.println(" 1.Validate Age \n 2.Validate Name \n 3.Lucky Customer \n Enter your choice:");
 
 		Scanner scan = new Scanner(System.in).useDelimiter(System.lineSeparator());
 		int choice = scan.nextInt();
-		switch(choice){
-			case 1:
-				System.out.println("Enter your birthdate: ");
-				String date = scan.nextLine();
-				Date birthDate = new SimpleDateFormat("dd-MM-YYYY").parse(date);
-				validateAge(birthDate);
-				break;
-			case 2:
-				System.out.println("Enter your name: ");
-				String name = scan.nextLine();
-				validateName(name);
-				break;
-			case 3:
-				System.out.println("Enter your moblie number: ");
-				String moblie = scan.nextLine();
-				validateLuckyCustomer(moblie);
-				break;
-		}
 		
+		if (choice == 1) {
+			System.out.println("Enter your birthdate: ");
+			String date = scan.nextLine();
+			Date birthDate = new SimpleDateFormat("dd-MM-yyyy").parse(date);
+			CTBRequirement3.validateAge(birthDate);
+		} else if (choice == 2) {
+			System.out.println("Enter your name: ");
+			String name = scan.nextLine();
+			CTBRequirement3.validateName(name);
+		} else {
+			System.out.println("Enter your moblie number: ");
+			String moblie = scan.nextLine();
+			CTBRequirement3.validateLuckyCustomer(moblie);
+		}
+
+		scan.close();
+
 	}
 
 	/*
@@ -53,13 +52,21 @@ public class CTBRequirement3 {
 	 * The age is considered valid only if it is greater than equal to 18.(Take
 	 * the current date as "01-01- 2018")
 	 * 
-	 * 
 	 */
 	public static Boolean validateAge(java.util.Date birth) {
-		
-		String strDate = dateFormat.format(birth);
-		
-		System.out.println("Age is valid");
+
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+		String strDate = formatter.format(birth);
+
+		String[] stringDateArray = strDate.split("-");
+
+		int enteredYear = Integer.parseInt(stringDateArray[2]);
+
+		if (2018 - enteredYear >= 18) {
+			System.out.println("Age is valid");
+			return true;
+		}
+
 		System.out.println("Age is Invalid");
 		return null;
 
@@ -77,16 +84,16 @@ public class CTBRequirement3 {
 	 */
 
 	public static Boolean validateName(String name) {
-		
+
 		Pattern p = Pattern.compile("[a-zA-Z]");
 		Matcher m = p.matcher(name);
 		boolean valid = m.matches();
-		
-		if(valid){
+
+		if (valid) {
 			System.out.println("Name is valid");
 			return true;
 		}
-		
+
 		System.out.println("Name is invalid");
 		return false;
 
@@ -131,12 +138,12 @@ public class CTBRequirement3 {
 			sum3 = sum3 + Integer.parseInt(c3.toString());
 
 		}
-		
-		if (sum3 == 1){
+
+		if (sum3 == 1) {
 			System.out.println("Lucky Customer");
 			return true;
 		}
-		
+
 		System.out.println("Unlucky Customer");
 		return false;
 
