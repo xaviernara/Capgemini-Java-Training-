@@ -1,0 +1,214 @@
+﻿
+
+	- presentation layer
+
+	- Controller layer
+
+		-> handle requests
+
+		-> Servlet
+			-> doGet
+			-> doPost
+			
+		-> Spring MVC		<--simple pojo classes
+
+	- model layer
+
+		-> BO			<--simple pojo classes
+		-> Services		<--simple pojo classes
+		-> Respositories	<--simple pojo classes
+
+
+
+
+
+
+
+
+Spring MVC
+---------------
+	- web framework bulit around principles of spring
+	- POJO based and interfae driven
+	- based on a dispatcher servlet/frontcontroller pattern
+		- model view controlle
+	- very lightweight and unobstrusive compared to other frameworks
+	- built from the shortcomings of struts 1
+	- supports
+		- themes
+		- locales/i18n
+		- restful services
+		- annotation based configuration
+		- seamless integration with other spring services/beans
+
+=> History
+---------------
+	- 2003 - spring framework - interface driven development
+		- overcome complexity
+
+	- 2004 - spring 1.0 - spring mvc
+		- integrate common tools like hibernate
+	- 2006 - 1.2.6
+		- security
+	- 2006 - spring 2.0
+		- backword compatible
+	- 2007 - spring 2.5
+		- annotation driven development
+	-2009 - spring 3.0
+		- java configuration
+
+=> Architecture
+----------------------------------
+	- custom app
+	- spring mvc/sprin
+	- java servlet/Jee
+
+
+	- standard way of dooing things
+	
+==> Request / Response life cycle
+--------------------------------------
+
+
+incoming request ------> FrontController	---> delegate Requet ---> Controller ----> handle request ----> backend
+				(DispatcherServlet)								 |
+			|		|	    delegate rendering <------controller model(data)     <-----|
+			|		|	
+			|		|
+			|	View Template (render response)
+			|		|
+		return control    <---- |
+
+==> Vocabulary
+---------------------
+	- DispatcherServlet
+		- the entry / configuration point for the application
+
+	-> Controller
+		- command pattern object that handles the request and determines which view to route to
+		- simple pojos
+	-> RequestMapping
+		- url and request type that a method is tied to
+	
+	-> ViewResolver
+		- locate view i.e. jsp pages or whatever view we are using 
+
+	-> ServletConfig
+		- per dispatcherservlet
+		- configuration file per dispatcherservlet
+
+	-> Pojo
+		- plain old java object
+
+	-> Bean
+			
+==> Building an application
+---------------------------------------
+
+	- Getting spring mvc
+		- spring framework
+			- http:www.springsource.org/spring-framework
+		- 21 diff jars that it downloads
+			- org.springframework.test
+			- org.springframework.web
+			- org.springframework.portlet
+			- org.springframework.servlet
+			- ....
+		- maven
+			- spring-webmvc
+			- servlet-api
+			- jstl 
+
+
+===> introduction to Spring MVC
+--------------------------------------
+	- Configure web.xml
+	- configure servlet-config.xml
+	- add controller
+	- add view : jsp / velocity / freemarker etc.
+
+==> tomcat
+-----------------------------
+	- 
+
+
+
+
+
+
+
+
+
+
+
+	@Controller 
+	public class LoginController{
+
+		@RequestMapping(value="/login, .....requesttype, contenttype, ....")
+		public ? checkLogin(@PathVariable username, @PathVariable password){
+
+
+			// what this method should return...
+			//Model
+			//View
+			//ModelAndView
+			//string ----> represents name of the view page to be rendered
+			//<E> 	 -----> json data
+		}
+
+
+	}
+
+
+
+1. create a dynamic web application project (maven)
+
+2. download all the required jar files...
+
+		spring-webmvc
+		servlet-api
+
+3. configure the tomcat server
+
+4. configure the DispatcherServlet in web.xml file
+
+	<servlet>
+		<servlet-name>dispatcher-servlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+			<servlet-name>dispatcher-servlet</servlet-name>
+			<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+5. create spring-beans.xml file / AppConfig.class to define all the beans i.e. Controllers/componets/services/repository
+
+	<context:component-scan base-package="com.capg" />
+    	<mvc:annotation-driven />
+
+6. configure the InternalResourceViewResolver
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/views/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+
+
+
+
+	localhost:8081/appName
+
+
+
+
+
+
+
+
+
+

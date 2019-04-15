@@ -11,7 +11,6 @@ import java.util.Random;
  */
 public class Customer {
 
-	private int cusID;
 	private String dateOfBirth;
 	private long SSD;
 	private String fullName;

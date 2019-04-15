@@ -1,0 +1,799 @@
+﻿
+- Spring IOC Container
+------------------------
+	- implementation of IOC design pattern
+		i.e. 	Structural
+			Behaviral DP
+			Architectural DP
+				- IOC (Inversion of Control)
+
+	- IOC is design principle, that describes to have an external entity to create and wire the objects
+	- Problem : Object Creation
+
+	*==> Loose coupling / Light weight application
+
+
+	Presentation layer
+		- JSP / JSF / thymeleaf / freemarker / velocity  
+
+	Controller layer
+		- handling requests
+		- Servlet / EJB / Spring MVC / ...
+
+	Model layer
+		- BO / beans
+		- Service 
+		- DAO / persistence 
+
+
+
+
+	Servlet application				spring application
+
+	-> Servlet container				IOC
+							   BeanFactory
+							   ApplicationContext
+
+===============================================================================================
+
+	-> diff between BeanFactory and ApplicationContext
+	-> what are the diff implementations of BeanFactory and ApplicationContext
+
+	-> diff constructor injection and setter injection
+	
+=============================================================================================
+
+
+1. Using xml configuration
+
+2. using annotations
+
+3. java configuration
+
+
+
+==>Bean Definition
+--------------------------
+	<beans>
+		<bean
+			id="someId"
+			class="com.capg.model.Product" />
+	
+		<bean			
+			id="someId"
+			class="com.capg.model.SomeClass">
+	
+			<constructor-arg>
+				<value>200</value>
+			</constructor-arg>
+		</bean>
+		<bean			
+			id="someId"
+			class="com.capg.model.SomeClass">
+	
+			<property name="somePropName">
+				<value> xyz </value>  or <ref bean="beanid" />
+			</property>
+		</bean>
+	</beans>
+
+
+
+
+=> bean definition ----> no-arg constructor --> setter methods ---> 
+
+
+
+==>Container
+---------------------------
+		ApplicationContext
+			|-> AnnotationConfigApplicationContext
+			|-> AnnotationConfigWebApplicationContext
+			|-> ClassPathXmlApplicationContext
+			|-> FileSystemXmlApplicationContext
+			|-> GenericXmlApplicationContext
+			|-> XmlWebApplicationContext
+
+
+
+
+==>bean instantiation
+--------------------------
+
+	<bean class="" />	//create object using constructor
+	
+	<bean class="" factory-method="" />	//create object using static factory method
+
+	<bean factory-bean="" factory-method="" /> //create object using non-static factory method
+
+
+===> constructor injection
+----------------------------
+	<bean id="" class="">
+		<constructor-arg>
+			<value>
+			<ref>
+			<null>
+			<list>
+			<set>
+			<map>
+			<array>
+			<bean>
+			<props>
+		<constructor-arg>	
+	</bean>
+
+
+
+===> setter injection
+----------------------------
+	<bean id="" class="">
+		<property>
+			<value>
+			<ref>
+			<null>
+			<list>
+			<set>
+			<map>
+			<array>
+			<bean>
+			<props>
+		<property>		
+	</bean>
+
+==> abstract bean definition
+--------------------------------------
+
+
+	<bean id="absStudent" abstract="true"  class="com.capg.model.Student>
+		<property name="uniName" value="Pune University" />
+	</bean>
+
+	<bean id="s1" class="com.capg.model.Student>
+		<property name="sid" value="1" />
+		<property name="sname" value="vishal" />
+	</bean>
+
+
+	<bean id="s2" class="com.capg.model.Student>
+		<property name="sid" value="2" />
+		<property name="sname" value="aniket" />
+	</bean>
+
+==> bean definition inheritance
+----------------------------------------
+
+A bean definition can contain a lot of configuration information, including constructor arguments, property values, and container-specific information such as initialization method, static factory method name, and so on.
+
+A child bean definition inherits configuration data from a parent definition. The child definition can override some values, or add others, as needed.
+
+Spring Bean definition inheritance has nothing to do with Java class inheritance but the inheritance concept is same. You can define a parent bean definition as a template and other child beans can inherit the required configuration from the parent bean.
+
+When you use XML-based configuration metadata, you indicate a child bean definition by using the parent attribute, specifying the parent bean as the value of this attribute
+
+ <bean id = "helloWorld" class = "com.tutorialspoint.HelloWorld">
+      <property name = "message1" value = "Hello World!"/>
+      <property name = "message2" value = "Hello Second World!"/>
+   </bean>
+
+   <bean id ="helloIndia" class = "com.tutorialspoint.HelloIndia" parent = "helloWorld">
+      <property name = "message1" value = "Hello India!"/>
+      <property name = "message3" value = "Namaste India!"/>
+   </bean>	
+
+
+===> Circular Dependency
+-------------------------------
+
+It happens when a bean A depends on another bean B, and the bean B depends on the bean A as well:
+
+Bean A -> Bean B -> Bean A
+
+Of course, we could have more beans implied:
+
+Bean A -> Bean B -> Bean C -> Bean D -> Bean E -> Bean A
+
+But, when having a circular dependency, Spring cannot decide which of the beans should be created first, since they depend on one another. In these cases, Spring will raise a BeanCurrentlyInCreationException while loading context.
+
+It can happen in Spring when using constructor injection; if you use other types of injections you should not find this problem since the dependencies will be injected when they are needed and not on the context loading.
+
+
+
+==> P namespace
+----------------------------
+
+In spring, p-namespace is the XML short cut to inject dependency in bean. p-namespace replaces <property> tag of XML. p-namespace has no XSD definition and it only exits in core of spring. We can directly assign the attribute name of the class with p-namespace within bean tag. We can use p-namespace in place of <property> tag in spring XML. It is easier and clear to use that will increase readability of spring XML application context. Suppose we have <bean> definition in XML as follows.
+
+<bean id="comp" class="com.concretepage.bean.Company">
+	<property name="name" value="ABCD Ltd"/>
+	<property name="location" value="India"/>
+</bean> 
+
+<bean id="comp" class="com.concretepage.bean.Company" p:name="ABCD Ltd" p:location="India"/>
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+==> C Namespace
+--------------------------------------
+
+c-namespace has been introduced in spring 3.1. It replaces the old style of constructor-arg. The bean which needs to be configured with c-namespace, must have constructor to accept those arguments. Find the old style for constructor dependency injection.
+
+<bean id="city" class="com.concretepage.bean.City">
+	<constructor-arg name="cityName" value="Agra"/>
+	<constructor-arg name="population" value="1000"/>
+</bean> 
+
+<bean id="city" class="com.concretepage.bean.City" c:cityName="Agra" c:population="1000"/>
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:c="http://www.springframework.org/schema/c"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+==> Util Namespace
+---------------------------------------
+
+	<util:list id="skills" list-class="java.util.ArrayList" value-type="java.lang.String" >
+		<value>SQL</value>
+		<value>Java</value>
+		<value>Unix Shell Programming</value>
+	</util:list>
+	
+	<util:map id="addresses" key-type="java.lang.String" value-type="java.lang.String" map-class="java.util.HashMap">
+		<entry key="permanentAddress" value="Programmersville"></entry>
+		<entry key="temporaryAddress" value="Townssvillie"></entry>
+	</util:map>
+	
+	<util:properties id="credentials" value-type="java.lang.String">
+		<prop key="username">thejavamonk</prop>
+		<prop key="password">HelloWorld</prop>
+	</util:properties>
+
+==> Depends on config
+---------------------------------
+
+Spring, by default, manages beans� lifecycle and arranges their initialization order.
+
+In spring application XML, if we need to initialize any bean before any other bean, depends-on do this job. While creating bean we need to define depends-on attribute in bean. 
+
+    <bean id="testA" class="com.concretepage.A"  depends-on="testB"/>
+    <bean id="testB" class="com.concretepage.B" depends-on="testC"/>
+    <bean id="testC" class="com.concretepage.C" />
+
+
+==> Spring Bean Initialization
+-----------------------------------
+	
+	-> Implement InitializingBean
+
+	-> using init() method attribute
+
+	-> using JSR 250 annotation @PostConstruct
+
+
+   => Implement InitializingBean
+   ----------------------------------
+
+	-> Container 
+		--> reads beans.xml 
+			--> Create java object
+				--> execute constructor
+					--> execute setter
+
+		--> InitializingBean hook
+			--> configure/execute something
+			--> initialization logic
+
+		--> DisposableBean hook
+		
+	-> Sometimes we want to initialize resources in the bean classes, for example creating database connections or validating third party services at the time of initialization before any client request. Spring framework provide different ways through which we can provide post-initialization and pre-destroy methods in a spring bean life cycle.
+	
+		1. By implementing InitializingBean and DisposableBean interfaces �
+
+			- Both these interfaces declare a single method where we can initialize/close resources in the bean. 
+			- For post-initialization, 
+				-we can implement InitializingBean interface and provide implementation of 					afterPropertiesSet() method. 
+			- For pre-destroy, 
+				-we can implement DisposableBean interface and provide implementation of destroy() method. 
+
+		2. Providing init-method and destroy-method attribute values for the bean in the spring bean configuration 			file. 
+
+		NOTE: Note that both post-init and pre-destroy methods should have no arguments but they can throw Exceptions. We would also require to get the bean instance from the spring application context for these methods invocation.
+
+
+
+		InitializingBean
+		init-method
+		@PostConstruct
+
+		DisposableBean
+		destroy-method
+		@PreDestroy
+
+
+==>Spring Bean Scopes
+----------------------------------
+	- singleton
+		- Scopes a single bean definition to a single object instance per Spring IoC container.
+
+	- prototype
+		- Scopes a single bean definition to any number of object instances.
+
+	- request
+		- Scopes a single bean definition to the lifecycle of a single HTTP request; that is each and every HTTP request will have its own instance of a bean created off the back of a single bean definition. Only valid in the context of a web-aware Spring ApplicationContext.
+		- RequestScope 
+
+	- session
+		- Scopes a single bean definition to the lifecycle of a HTTP Session. Only valid in the context of a web-aware Spring ApplicationContext.
+		- SessionScope
+
+	- application
+		- ServletContextScope
+
+	- global session (portlet)
+		- Scopes a single bean definition to the lifecycle of a global HTTP Session. Typically only valid when used in a portlet context. Only valid in the context of a web-aware Spring ApplicationContext.
+
+	- websocket (spring 4.x)
+
+	- thread (spring 3)
+
+		- backing class 
+			- SimpleThreadScope		 
+
+	- scoped bean dependencies
+
+
+	- custom scope
+		- Scope implementation class
+		- Register the scope implementation class in to the spring container
+
+		- In order to create a custom scope, we must implement the Scope interface		
+
+		<bean id="s3" class="com.capg.model.Student" scope="thread" />
+
+		<bean id="sts" class="org.springframework.context.support.SimpleThreadScope"/>
+
+		<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+			<property>
+				<map>
+				   <entry key="thread" value-ref="sts" /> 
+				</map>
+			</property>
+		</bean>
+
+
+===>Aware Interfaces
+-------------------------
+
+
+	=> Sometimes it is required that our beans needs to get some information about Spring container and its resources.
+	=> For example, sometime bean need to know the current Application Context using which it can perform some operations like loading specific bean from the container in a programmatic way.
+	=> So to make the beans aware about this, spring provides lot of Aware interfaces.
+	=> All we have to do is, make our bean to implement the Aware interface and implement the setter method of it.
+	=> org.springframework.beans.factory.Aware is the root marker interface.
+
+
+	- ApplicationContextAware
+		-> Bean implementing this interface can get the current application context and this can be used to call any service from the application context
+
+
+	- ApplicationEventPublisherAware
+		- Bean implementing this interface can publish the application events and we need to create listener which listen this event.
+
+	- BeanclassLoaderAware
+
+	- BeanFactoryAware
+		-> Bean implementing this interface can get the current bean factory and this can be used to call any service from the bean factory
+
+	- BeanNameAware
+		-> Bean implementing this interface can get its name defined in the Spring container.
+
+
+	- EnvironmentAware
+
+	- MessageSourceAware
+		- Bean implementing this interface can get the access to message source object which is used to achieve internationalization
+
+
+	- ResourceLoaderAware
+		- Bean implementing this interface can load the resources from the classpath or any external file.
+
+
+	- ServletConfigAware
+		- Bean implementing this interface can get the access to ServletConfig object which is used to get the servlet config parameters
+
+	- ServletContextAware
+		- Bean implementing this interface can get the access to ServeltContext which is used to access servlet context parameters and attributes
+
+==> Container Extension Points
+-----------------------------------
+	-> BeanPostProcessor
+
+	-> BeanFactoryPostProcessor
+
+
+==> Using Annotation
+-------------------------------
+	Spring 2
+		@Required
+	Spring 2.5
+		@Autowired
+		jsr 250 annotation
+		@PostConstruct
+		@PreDestroy
+		@Resource
+	Spring 3
+		jsr 330 annotation
+		@Named
+		@Inject
+	
+
+	-@Autowired
+	-@Bean
+	-@Qualifier
+	-@Required
+	-@Value
+	-@DependsOn
+	-@Lazy
+	-@Lookup
+	-@Primary
+	-@Scope
+	-@Profile
+	-@Import
+	-@ImportResource
+	-@PropertySource
+	-@PropertySources
+
+==>@Autowired
+	-> We can use the @Autowired annotation to mark the dependency that Spring is going to resolve and inject. We can use this annotation with a constructor, setter, or field injection
+
+
+==>@Bean
+ 	- @Bean is a method-level annotation and a direct analog of the XML element. The annotation supports some of the attributes offered by, such as the init-method, destroy-method, auto-wiring, and name.
+	- You can use the  @Bean annotation in a  @Configuration-annotated or @Component-annotated class.
+
+@Configuration
+public class Application {
+    @Bean
+    public CustomerService customerService() {
+        return new CustomerService();
+    }
+    @Bean
+    public OrderService orderService() {
+        return new OrderService();
+    }
+}
+
+
+==> @Qualifier
+	- This annotation helps fine-tune annotation-based auto-wiring. There may be scenarios when we create more than one bean of the same type and want to wire only one of them with a property. This can be controlled using the @Qualifier annotation along with the  @Autowired annotation.
+
+
+public interface MessageService {
+    public void sendMsg(String message);
+}
+
+public class EmailService implements MessageService{
+    public void sendMsg(String message) {
+         System.out.println(message);
+    }
+}
+
+
+public class SMSService implements MessageService{
+    public void sendMsg(String message) {
+         System.out.println(message);
+    }
+}
+
+public interface MessageProcessor {
+    public void processMsg(String message);
+}
+public class MessageProcessorImpl implements MessageProcessor {
+    private MessageService messageService;
+    // setter based DI
+    @Autowired
+    @Qualifier("emailService")
+    public void setMessageService(MessageService messageService) {
+        this.messageService = messageService;
+    }
+    // constructor based DI
+    @Autowired
+    public MessageProcessorImpl(@Qualifier("emailService") MessageService messageService) {
+        this.messageService = messageService;
+    }
+    public void processMsg(String message) {
+        messageService.sendMsg(message);
+    }
+}
+
+===> @Required
+	- The @Required annotation is a method-level annotation and applied to the setter method of a bean.
+
+	- This annotation simply indicates that the setter method must be configured to be dependency-injected with a value at configuration time.
+
+	- For example, @Required on setter methods marks dependencies that we want to populate through XML:
+
+@Required
+void setColor(String color) {
+    this.color = color;
+}
+
+
+==> @Value
+	-The Spring @Value annotation is used to assign default values to variables and method arguments. We can read Spring environment variables as well as system variables using the @Value annotation.
+
+	- The Spring @Value annotation also supports SpEL. Let�s look at some of the examples of using the @Value annotation.
+
+	- Examples: We can assign a default value to a class property using the @Value annotation.
+
+
+@Value("Default DBConfiguration")
+private String defaultName;
+
+
+The @Value annotation argument can be a string only, but Spring tries to convert it to the specified type. The following code will work fine and assign the boolean and integer values to the variable.
+@Value("true")
+private boolean defaultBoolean;
+
+@Value("10")
+private int defaultInt;
+
+
+This demonstrates the Spring  
+@Value � Spring Environment Property
+
+@Value("${APP_NAME_NOT_FOUND}")
+private String defaultAppName;
+
+
+Next, assign system variables using the @Value annotation.
+
+@Value("${java.home}")
+private String javaHome;
+
+@Value("${HOME}")
+private String homeDir;
+
+
+Spring @Value  � SpEL
+
+@Value("#{systemProperties['java.home']}")
+private String javaHome;
+
+===> @DependsOn
+	- The@DependsOn annotation can force Spring IoC containers to initialize one or more beans before the bean, which is annotated by the  @DependsOn annotation.
+
+	- The @DependsOn annotation may be used on any class directly or indirectly annotated with the  @Component or on methods annotated with the @Bean.
+
+
+public class FirstBean {
+    @Autowired
+    private SecondBean secondBean;
+}
+public class SecondBean {
+    public SecondBean() {
+        System.out.println("SecondBean Initialized via Constuctor");
+    }
+}
+
+Declare the above beans in Java based on the configuration class.
+
+
+@Configuration
+public class AppConfig {
+    @Bean("firstBean")
+    @DependsOn(value = {
+        "secondBean"
+    })
+    public FirstBean firstBean() {
+        return new FirstBean();
+    }
+    @Bean("secondBean")
+    public SecondBean secondBean() {
+        return new SecondBean();
+    }
+}
+
+
+===> @Lazy
+	- By default, the Spring IoC container creates and initializes all singleton beans at the time of application startup. We can prevent this pre-initialization of a singleton bean by using the @Lazy annotation.
+
+	- The  @Lazy annotation may be used on any class, directly or indirectly annotated with the  @Component or on methods annotated with the @Bean.
+
+
+public class FirstBean {
+    public void test() {
+        System.out.println("Method of FirstBean Class");
+    }
+}
+
+public class SecondBean {
+    public void test() {
+        System.out.println("Method of SecondBean Class");
+    }
+}
+
+@Configuration
+public class AppConfig {
+    @Lazy(value = true)
+    @Bean
+    public FirstBean firstBean() {
+        return new FirstBean();
+    }
+    @Bean
+    public SecondBean secondBean() {
+        return new SecondBean();
+    }
+}
+
+
+==> @Lookup
+	- A method annotated with  @Lookup tells Spring to return an instance of the method�s return type when we invoke it.
+
+
+==> @Primary
+	- We use the  @Primary to give higher preference to a bean when there are multiple beans of the same type.
+
+
+@Component
+@Primary
+class Car implements Vehicle {}
+
+@Component
+class Bike implements Vehicle {}
+
+@Component
+class Driver {
+    @Autowired
+    Vehicle vehicle;
+}
+@Component
+class Biker {
+    @Autowired
+    @Qualifier("bike")
+    Vehicle vehicle;
+}
+
+
+===> @Scope
+	- We use the@Scope annotation to define the scope of a  @Component class or the @Bean definition. It can be either singleton, prototype, request, session, globalSession, or some custom scope.
+
+For example:
+
+@Component
+@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
+public class TwitterMessageService implements MessageService {
+}
+@Component
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+public class TwitterMessageService implements MessageService {
+}
+
+
+===> @Profile
+	- If we want Spring to use the @Component class or the @Bean method only when a specific profile is active, we can mark it with  @Profile. We can configure the name of the profile with the value argument of the annotation:
+
+@Component
+@Profile("sportDay")
+class Bike implements Vehicle {}
+
+===> @Import
+The  @Import annotation indicates one or more @Configuration classes to import.
+
+For example: in a Java-based configuration, Spring provides the @Import  annotation, which allows the loading @Bean definitions from another configuration class.
+
+@Configuration
+public class ConfigA {
+    @Bean
+    public A a() {
+        return new A();
+    }
+}
+
+@Configuration
+@Import(ConfigA.class)
+public class ConfigB {
+    @Bean
+    public B b() {
+        return new B();
+    }
+}
+
+
+===> @ImportResource
+Spring provides an @ImportResource annotation used to load beans from an applicationContext.xml file into an ApplicationContext. For example: consider that we have applicationContext.xml Spring bean configuration XML file on the classpath.
+
+@Configuration
+@ImportResource({"classpath*:applicationContext.xml"})
+public class XmlConfiguration {
+}
+
+===>@PropertySource
+The  @PropertySource annotation provides a convenient and declarative mechanism for adding a PropertySource to Spring�s Eenvironment to be used in conjunction with the @Configuration classes.
+
+For example, we are reading database configuration from the file config.propertiesfile and setting these property values to the DataSourceConfig class using the Environment.
+
+@Configuration
+@PropertySource("classpath:config.properties")
+public class ProperySourceDemo implements InitializingBean {
+    @Autowired
+    Environment env;
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        setDatabaseConfig();
+    }
+    private void setDatabaseConfig() {
+        DataSourceConfig config = new DataSourceConfig();
+        config.setDriver(env.getProperty("jdbc.driver"));
+        config.setUrl(env.getProperty("jdbc.url"));
+        config.setUsername(env.getProperty("jdbc.username"));
+        config.setPassword(env.getProperty("jdbc.password"));
+        System.out.println(config.toString());
+    }
+}
+
+
+==> @PropertySources
+We can use this annotation to specify multiple  @PropertySource  configurations:
+
+ @PropertySources({
+  @PropertySource("classpath:config.properties"),
+  @PropertySource("classpath:db.properties")
+ })
+ public class AppConfig {
+  //...
+ }
+
+===> classpath scanning and managed components
+----------------------------------------------------
+	-> @Component and other stereotype annotations
+		
+	-> using meta-annotation and composed annotations
+
+	-> Automatically dettecting classes and registerning bean definitions
+
+	-< providing scope for autodetected components 
+
+	-> naming autodetencted components 
+
+	-> providing qualifier metadata with annotations 
+
+
+===> Java Based configuration
+-------------------------------------
+	- @Bean @Configuration
+	- @Bean annotation
+		- declaring a bean
+		- bean dependencies
+		- receiving life cycle callbacks
+		- specifying bean scope
+		- customizing bean naming
+		- bean description
+	Instantiating the spring container by using AnnotationConfigApplicationContext
+		- simple construction
+		- building the container programmaticallly using register(Class<T>)
+		- enabling component scanning with scan(string)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

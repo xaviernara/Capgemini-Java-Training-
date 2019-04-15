@@ -6,13 +6,20 @@ import com.capgemini.pwa.beans.Wallet;
 public interface WalletDAO {
 
 	/*
+	 * Adds a new customer to the database
+	 * and prints the customer new account number
+	 * 
+	 */
+	public void createAccount(Wallet wallet);
+	
+	/*
 	 * Given the account holding user, the user is able to transfer some or all
 	 * of his/her funds from their own account to any other account registered
 	 * on the payment wallet application.
 	 * 
 	 * return the amount transfered from one customer to another
 	 */
-	public double transfer(Wallet account1, Wallet account2, double transferAmount);
+	public void transfer(int accountID1, int accountID2, double transferAmount) ;
 
 	/*
 	 * deposit will calculate the customer's new balance after money is added to
@@ -26,19 +33,19 @@ public interface WalletDAO {
 	 * validateAmmountAdditionRequest() returns true
 	 *
 	 */
-	public void deposit(Wallet[] account,int accountNumber, double newMoney);
+	public void deposit(int accountNumber, double newMoney);
 
 	/*
 	 * withdraw() will return the money that a customer wants to transfer to
 	 * another user and return the new balance after withdrawal
 	 */
-	public void withdraw(Wallet[] account,int accountNumber , double withdrawl);
+	public void withdraw(int accountNumber, double withdrawl) ;
 
 	/*
-	 * print all the Customers with wallet accounts
+	 * print all the Customers with wallet accounts from the database
 	 * 
 	 */
-	public void printAllAccounts(Wallet[] accounts);
+	public void printAllAccounts();
 
 	/*
 	 * Given the user signup / register / create account page, the user is able
@@ -65,14 +72,10 @@ public interface WalletDAO {
 	 */
 	
 	/*
-	 * returns the available balance of the customer's wallet account 
+	 * prints the available balance of the customer's wallet account (ie the database)
 	 * 
 	 */
-	double viewBalance(Wallet[] account, int accountNumber);
-	
-	
-	
-	
+	public void viewBalance(int accountNumber);
 	
 	
 
@@ -80,13 +83,13 @@ public interface WalletDAO {
 	 * Given the registered credentials, the user should be able to access the
 	 * payment wallet.
 	 */
-	Customer findAccount(Wallet[] accounts, String accountType, String customerName);
+	public void findAccount(int accountNumber) ;
 
 	/*
 	 * return boolean if both customers have a wallet and customer1 has enough
 	 * money to transfer to the other
 	 */
-	boolean validateTransfer(Wallet account1, Wallet account2);
+	public boolean validateTransfer(double balance1, double transferAmount, String account1, String account2);
 
 	/*
 	 * returns boolean if the password and user name match the wallet account or not

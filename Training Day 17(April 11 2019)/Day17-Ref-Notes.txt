@@ -1,0 +1,161 @@
+﻿
+==========================================================
+
+Interservlet communication
+---------------------------------
+	=> RequestDispatcher
+		-> include()
+		-> forward()
+
+	=> response.sendRedirect(-);
+
+Session Management
+------------------------
+	-> HttpSession
+	-> cookies
+	-> url rewritting
+
+DataSource
+----------------------
+	-> improves application performance, as the connections are managed by containers/servers i.e. tomcat
+	-> it provides facility for creating connection pooling
+	-> helpful for enterprise applications
+
+
+	*=> we can configure the db credentials in .properties file / xml files
+
+DataSource vs DriverManager
+=============================================================================
+
+Spring
+--------------------
+
+	-> presentation layer
+		- HTML, CSS, Bootstrap, javascript, jquery
+		- Angular/React frameworks
+		- JSP, JSF
+		- Framemaker, velocity, etc.
+
+
+
+
+	
+	=> light weight applications
+	=> loosely coupled applications
+	=> reduces the cost
+	=> no need of server to execute the controllers
+
+
+IOC and DI
+------------------
+
+	Inversion of Control
+		-> controls how objects should be created
+		-> to control and manage life cycle of objects i.e. creation, destruction, and invoking some callbacks
+		-> the programmer must identify the classes whoes instance are to be managed by the IOC container
+
+	Dependency Injection
+		-> injects the objects to appropriate places
+
+Spring (IOC) Containers
+----------------------
+
+
+	Servlet Container
+	-----------------------
+		-> reads the web.xml file
+		-> load the Servlet class into memory
+		-> creates instances of Servlet
+		-> supply dynamic parameters to Servlet
+	
+	IOC container
+	---------------------------
+		-> read the beans.xml (beans.xml file we can describe how the object should be created)
+		-> create instance of beans/pojo classes
+		-> manage life cycle 
+		-> supply dynamic parameters
+
+
+IOC Containers
+---------------------
+
+	1. Core Container
+		|
+		|-->BeanFactory (interface)
+		|	|-> XmlBeanFactory (class)
+	
+	2. J2EE container
+		|
+		|->ApplicationContext (interface)
+		|	|-> ClasspathXmlApplicationContext (class)
+
+	3. Web Container
+
+----------------------------------------------------------------------
+
+
+1. bean/pojo class
+
+	class Employee {
+
+
+	}
+
+2. use spring framework, IOC container to create instance of pojos/beans
+
+	a. download the spring jar files and configure the build path
+
+	b. define the beans.xml file to describe how objects should be created
+
+	C. create the container object, and using the container we can get he objects
+
+Bean configuration / bean definitions
+-------------------------------------------
+
+	1. using xml
+	
+	2. using annotations
+
+	3. using java configurations
+
+
+spring core
+	-> 
+
+spring mvc
+
+spring orm
+
+spring data
+
+spring data jpa
+
+spring data rest
+
+spring batch
+
+spring security
+
+spring boot 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
