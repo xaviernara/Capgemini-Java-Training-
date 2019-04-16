@@ -27,10 +27,10 @@
 
 Spring MVC
 ---------------
-	- web framework bulit around principles of spring
-	- POJO based and interfae driven
-	- based on a dispatcher servlet/frontcontroller pattern
-		- model view controlle
+	- web framework built around principles of spring
+	- POJO based and interface driven
+	- based on a DispatcherServlet/frontcontroller pattern
+		- model view controller
 	- very lightweight and unobstrusive compared to other frameworks
 	- built from the shortcomings of struts 1
 	- supports
@@ -69,9 +69,9 @@ Spring MVC
 --------------------------------------
 
 
-incoming request ------> FrontController	---> delegate Requet ---> Controller ----> handle request ----> backend
-				(DispatcherServlet)								 |
-			|		|	    delegate rendering <------controller model(data)     <-----|
+incoming request ------> FrontController	---> delegate Request ---> Controller ----> handle request ----> backend
+			(DispatcherServlet)								 	      |
+			|		|	    delegate rendering <------controller model(data)     	<-----|
 			|		|	
 			|		|
 			|	View Template (render response)
@@ -85,7 +85,8 @@ incoming request ------> FrontController	---> delegate Requet ---> Controller --
 
 	-> Controller
 		- command pattern object that handles the request and determines which view to route to
-		- simple pojos
+		- simple pojos annotated with @Controller
+
 	-> RequestMapping
 		- url and request type that a method is tied to
 	
@@ -164,8 +165,8 @@ incoming request ------> FrontController	---> delegate Requet ---> Controller --
 
 2. download all the required jar files...
 
-		spring-webmvc
-		servlet-api
+		spring-context, spring-webmvc
+		servlet-api, jstl, etc.
 
 3. configure the tomcat server
 
@@ -174,6 +175,11 @@ incoming request ------> FrontController	---> delegate Requet ---> Controller --
 	<servlet>
 		<servlet-name>dispatcher-servlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+
+		<init-param>
+			<param-name></param-name>
+			<param-value></param-value>
+		</init-param>
 	</servlet>
 
 	<servlet-mapping>
@@ -198,10 +204,132 @@ incoming request ------> FrontController	---> delegate Requet ---> Controller --
 		</property>
 	</bean>
 
+-----------------------------------------------------------------------------------
+
+
+Spring Boot application with Spring MVC
+-----------------------------------------------------
+	-> provides RAD - Rapid Application Development features...
+	-> simplifies the process of creating / managing / deploying the applications
+
+	1. using spring initialzr
 
 
 
-	localhost:8081/appName
+@RequestMapping
+
+
+Accessing HttpServletRequest object
+---------------------------------------
+
+	@RequestMapping(value="/add", method=RequestMethod.POST )
+	public String addEmployee(HttpServletRequest request) {
+				
+		System.out.println(request.getParameter("empid"));
+		System.out.println(request.getParameter("ename"));
+		System.out.println(request.getParameter("city"));
+		System.out.println(request.getParameter("salary"));
+
+
+@RequestBody
+	
+	--> read the json data received along with request, converts to the given type
+
+	@RequestMapping(value="/add", method=RequestMethod.POST )
+	public String addEmployee(@RequestBody Employee emp) {
+		
+		
+		System.out.println(emp.getEmpId());
+		System.out.println(emp.geteName());
+		System.out.println(emp.getCity());
+		System.out.println(emp.getSalary());
+
+@RequestParam
+	-> we can read the query parameters
+
+
+	http://localhost:8081/employees/add?empid=101&ename=vishal&city=pune&salary=2000
+
+	@RequestMapping(value="/add", method=RequestMethod.GET )
+	public String addEmployee(
+			@RequestParam(name="empid") int id, 
+			@RequestParam(name="ename") String name, 
+			@RequestParam(name="city") String city, 
+			@RequestParam(name="salary") double sal) {
+		
+		
+		System.out.println(id);
+		System.out.println(name);
+		System.out.println(city);
+		System.out.println(sal);
+
+@PathVariable
+	-> we can bind the url parameters to the handler method
+
+	http://localhost:8081/employees/add/101/vishal/pune/2000
+
+
+
+@ResponseBody
+
+@GetMapping
+
+@PostMapping
+
+@PutMapping
+
+@DeleteMapping
+
+@ModelAttribute 
+	-> 
+
+
+
+@Model
+
+@RequestHeader  / @ResponseHeader
+
+
+Spring Data JPA
+
+Spring Data REST
+
+Spring Boot
+
+
+
+	@Controller							@RestController
+
+	  -> return a view
+
+		@GetMapping(...)					@GetMapping(...)				
+		public String getXXX(){					public XXX getEXXX(){
+			//return name of the viewpage				return X;
+			//return modelAndView				}
+		}
+
+
+	-> return json data / REST api
+
+		
+		@GetMapping(...)
+		@ResponseBody
+		public XXX getXXX(){
+			return XXX;
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

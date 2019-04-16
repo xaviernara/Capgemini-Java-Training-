@@ -28,6 +28,7 @@ public class Main {
 		System.out.println("2  Login");
 		System.out.println("3. Exit");
 		int wantAccount = scan.nextInt();
+	
 
 		switch (wantAccount) {
 
@@ -36,7 +37,7 @@ public class Main {
 
 			int numOfAccount = scan.nextInt();
 			Wallet[] walletArray = new Wallet[numOfAccount];
-
+			
 			for (int i =0; i< walletArray.length;i++) {
 
 				System.out.println("Enter Full Name: ");
@@ -96,7 +97,7 @@ public class Main {
 
 			boolean menuContinue = true;
 
-			if (walletDAO.validateLogin(walletArray, password, userName)) {
+			if (walletDAO.validateLogin( password, userName)) {
 
 				while (menuContinue) {
 

@@ -10,11 +10,9 @@ import java.sql.*; // for standard JDBC programs
 public class WalletDAOImp implements WalletDAO {
 
 	public void createAccount(Wallet wallet) {
-		
-		
+
 		try {
-			
-			
+
 			String insertQuery = "INSERT INTO walletTable VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement ps = DBconnection.dbConnect().prepareStatement(insertQuery);
 			ps.setInt(1, wallet.getCustomer().getAccountNumber());
@@ -47,22 +45,9 @@ public class WalletDAOImp implements WalletDAO {
 	@Override
 	public void transfer(int accountID1, int accountID2, double transferAmount) {
 
-		// if (validateTransfer(account1, account2)) {
-		//
-		// double deduction = account1.getBalance() - transferAmount;
-		// double transfer = account2.getBalance() + deduction;
-		// account2.setBalance(transfer);
-		// account1.setBalance(deduction);
-		//
-		// System.out.println("Your new balance: ");
-		// return account1.getBalance();
-		// }
-
-		// if (validateTransfer(account1, account2)) {
-
 		try {
-			String selectQuery1 = "SELECT balance FROM walletTable WHERE id = ?";
-			String selectQuery2 = "SELECT balance FROM walletTable WHERE id = ?";
+			String selectQuery1 = "SELECT BALANCE FROM walletTable WHERE id = ?";
+			String selectQuery2 = "SELECT BALANCE FROM walletTable WHERE id = ?";
 			PreparedStatement preparedStatement;
 			preparedStatement = DBconnection.dbConnect().prepareStatement(selectQuery1);
 			PreparedStatement preparedStatement2 = DBconnection.dbConnect().prepareStatement(selectQuery2);
@@ -72,14 +57,14 @@ public class WalletDAOImp implements WalletDAO {
 			ResultSet rs = preparedStatement.executeQuery();
 			ResultSet rs1 = preparedStatement.executeQuery();
 
-			double balance1 = rs.getInt("balance");
-			double balance2 = rs1.getInt("balance");
+			double BALANCE1 = rs.getInt("BALANCE");
+			double BALANCE2 = rs1.getInt("BALANCE");
 
-			double deduction = balance1 - transferAmount;
-			double transfer = balance2 + deduction;
+			double deduction = BALANCE1 - transferAmount;
+			double transfer = BALANCE2 + deduction;
 
-			String updateQuery1 = "UPDATE walletTable SET balance = ? WHERE id = ?";
-			String updateQuery2 = "UPDATE walletTable SET balance = ? WHERE id = ?";
+			String updateQuery1 = "UPDATE walletTable SET BALANCE = ? WHERE id = ?";
+			String updateQuery2 = "UPDATE walletTable SET BALANCE = ? WHERE id = ?";
 			preparedStatement = DBconnection.dbConnect().prepareStatement(updateQuery1);
 			preparedStatement2 = DBconnection.dbConnect().prepareStatement(updateQuery2);
 
@@ -95,7 +80,7 @@ public class WalletDAOImp implements WalletDAO {
 			if (i > 0 & i2 > 0) {
 				System.out.println("\n\t " + i + " records inserted");
 				System.out.println("Transfer has been made");
-				System.out.println("Your new balance: " + deduction);
+				System.out.println("Your new BALANCE: " + deduction);
 			} else {
 				System.out.println("Transfer could not be made!");
 			}
@@ -103,7 +88,6 @@ public class WalletDAOImp implements WalletDAO {
 			DBconnection.disconnect();
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -111,21 +95,9 @@ public class WalletDAOImp implements WalletDAO {
 
 	@Override
 	public void deposit(int accountNumber, double newMoney) {
-
-		// for (Wallet wallet : account) {
-		//
-		// if (validateAccountNumber(account, accountNumber)) {
-		// System.out.println("Your balance before deposit: " +
-		// wallet.getBalance());
-		// double newBalance = wallet.getBalance() + newMoney;
-		// wallet.setBalance(newBalance);
-		// System.out.println("Your new balance after deposit: " +
-		// wallet.getBalance());
-		//
-		// }
-		// }
+		
 		try {
-			String selectQuery1 = "SELECT balance FROM walletTable WHERE id = ?";
+			String selectQuery1 = "SELECT BALANCE FROM walletTable WHERE id = ?";
 
 			PreparedStatement preparedStatement = DBconnection.dbConnect().prepareStatement(selectQuery1);
 
@@ -133,18 +105,15 @@ public class WalletDAOImp implements WalletDAO {
 
 			ResultSet rs = preparedStatement.executeQuery();
 
-			double balance = rs.getDouble("balance");
+			double BALANCE = rs.getDouble("BALANCE");
 
-			// while (rs.next()) {
-			// balance = rs.getDouble("balance");
-			// }
 
-			double newBalance = balance + newMoney;
+			double newBALANCE = BALANCE + newMoney;
 
-			String updateQuery = "UPDATE walletTable SET balance =? WHERE id = ?";
+			String updateQuery = "UPDATE walletTable SET BALANCE =? WHERE id = ?";
 			PreparedStatement preparedStatement2 = DBconnection.dbConnect().prepareStatement(updateQuery);
 			preparedStatement2.setInt(2, accountNumber);
-			preparedStatement2.setDouble(1, newBalance);
+			preparedStatement2.setDouble(1, newBALANCE);
 
 			int i = preparedStatement2.executeUpdate(updateQuery);
 
@@ -193,20 +162,20 @@ public class WalletDAOImp implements WalletDAO {
 		// for (Wallet wallet : account) {
 		//
 		// if (validateAccountNumber(account, accountNumber)) {
-		// System.out.println("Your new balance before withdrawl: " +
-		// wallet.getBalance());
+		// System.out.println("Your new BALANCE before withdrawl: " +
+		// wallet.getBALANCE());
 		//
-		// double subtract = wallet.getBalance() - withdrawl;
+		// double subtract = wallet.getBALANCE() - withdrawl;
 		//
-		// wallet.setBalance(subtract);
+		// wallet.setBALANCE(subtract);
 		//
-		// System.out.println("Your new balance after withdrawl: " +
-		// wallet.getBalance());
+		// System.out.println("Your new BALANCE after withdrawl: " +
+		// wallet.getBALANCE());
 		// }
 		// }
 
 		try {
-			String selectQuery1 = "SELECT balance FROM walletTable WHERE id = ?";
+			String selectQuery1 = "SELECT BALANCE FROM walletTable WHERE id = ?";
 
 			PreparedStatement preparedStatement = DBconnection.dbConnect().prepareStatement(selectQuery1);
 
@@ -214,15 +183,15 @@ public class WalletDAOImp implements WalletDAO {
 
 			ResultSet rs = preparedStatement.executeQuery();
 
-			double balance = rs.getDouble("balance");
+			double BALANCE = rs.getDouble("BALANCE");
 
-			String updateQuery = "UPDATE walletTable SET (balance) = ? WHERE id = ?";
+			String updateQuery = "UPDATE walletTable SET (BALANCE) = ? WHERE id = ?";
 
-			double subtract = balance - withdrawl;
+			double subtract = BALANCE - withdrawl;
 
 			PreparedStatement preparedStatement2 = DBconnection.dbConnect().prepareStatement(updateQuery);
 			preparedStatement2.setInt(2, accountNumber);
-			preparedStatement2.setDouble(2, balance);
+			preparedStatement2.setDouble(2, BALANCE);
 
 			int i = preparedStatement2.executeUpdate(updateQuery);
 
@@ -256,10 +225,10 @@ public class WalletDAOImp implements WalletDAO {
 				System.out.println("Account Number: " + rs.getInt("id"));
 				System.out.println("Full Name: " + rs.getString("fullname"));
 				System.out.println("SSD:" + rs.getDouble("SSD"));
-				System.out.println("BALANCE: " + rs.getDouble("balance"));
+				System.out.println("BALANCE: " + rs.getDouble("BALANCE"));
 				System.out.println("Email: " + rs.getString("email"));
 				System.out.println("Username: " + rs.getString("username"));
-				System.out.println("Password: " + rs.getDouble("password"));
+				System.out.println("PASSWORD: " + rs.getDouble("PASSWORD"));
 
 			}
 		} catch (SQLException e) {
@@ -270,11 +239,11 @@ public class WalletDAOImp implements WalletDAO {
 	}
 
 	@Override
-	public boolean validateLogin(Wallet[] accounts, String password, String userName) {
+	public boolean validateLogin(Wallet[] accounts, String PASSWORD, String userName) {
 
 		for (Wallet wallet : accounts) {
 
-			if ((wallet.getCustomer().getPassword().equals(password))
+			if ((wallet.getCustomer().getPASSWORD().equals(PASSWORD))
 					&& (wallet.getCustomer().getUserName().equals(userName))) {
 
 				return true;
@@ -283,21 +252,29 @@ public class WalletDAOImp implements WalletDAO {
 
 		return false;
 	}
-	
-	public boolean validateLogin(String password, String userName) {
 
-		//for (Wallet wallet : accounts) {
+	public boolean validateLogin(String PASSWORD, String userName) {
 
-			if ((wallet.getCustomer().getPassword().equals(password))
-					&& (wallet.getCustomer().getUserName().equals(userName))) {
+		try {
+			String selectQuery1 = "SELECT PASSWORD, username FROM walletTable";
 
+			PreparedStatement preparedStatement = DBconnection.dbConnect().prepareStatement(selectQuery1);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			if (rs.getString("username").equals(userName) && rs.getString("PASSWORD").equals(PASSWORD)) {
 				return true;
 			}
-		//}
 
+			DBconnection.disconnect();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+
+		}
 		return false;
+
 	}
-	
 
 	/*
 	 * @Override public boolean validateAmmountAdditionRequest(Wallet account) {
@@ -311,7 +288,7 @@ public class WalletDAOImp implements WalletDAO {
 		//
 		// if
 		// ((wallet.getCustomer().getFullName().equalsIgnoreCase(customerName))
-		// && wallet.getAccountType().equalsIgnoreCase(accountType)) {
+		// && wallet.getaccountType().equalsIgnoreCase(accountType)) {
 		// return wallet.getCustomer();
 		// }
 		// }
@@ -328,10 +305,10 @@ public class WalletDAOImp implements WalletDAO {
 				System.out.println("Account Number: " + rs.getString("id"));
 				System.out.println("Full Name: " + rs.getString("fullname"));
 				System.out.println("SSD" + rs.getDouble("SSD"));
-				System.out.println("BALANCE: " + rs.getDouble("balance"));
+				System.out.println("BALANCE: " + rs.getDouble("BALANCE"));
 				System.out.println("Email: " + rs.getString("email"));
 				System.out.println("Username: " + rs.getString("username"));
-				System.out.println("Password: " + rs.getDouble("password"));
+				System.out.println("PASSWORD: " + rs.getDouble("PASSWORD"));
 
 			}
 		} catch (SQLException e) {
@@ -342,27 +319,27 @@ public class WalletDAOImp implements WalletDAO {
 	}
 
 	/*
-	 * returns boolean if the customer's account has zero balance or not
+	 * returns boolean if the customer's account has zero BALANCE or not
 	 * 
 	 */
-	private boolean hasNonZeroBalance(double balance) {
+	private boolean hasNonZeroBALANCE(double BALANCE) {
 
-		// if (account1.getBalance() > 0) {
+		// if (account1.getBALANCE() > 0) {
 		// return true;
 		// }
 
-		if (balance > 0) {
+		if (BALANCE > 0) {
 			return true;
 		}
 
 		return false;
 	}
 
-	private boolean hasAvaliableFunds(double balance, double transferAmount) {
+	private boolean hasAvaliableFunds(double BALANCE, double transferAmount) {
 
-		double subtract = balance - transferAmount;
+		double subtract = BALANCE - transferAmount;
 
-		if (balance >= subtract) {
+		if (BALANCE >= subtract) {
 			return true;
 		}
 		System.out.println("You don't have enough funds to transfer money");
@@ -376,7 +353,7 @@ public class WalletDAOImp implements WalletDAO {
 	 */
 	private boolean hasAccount(String account1, String account2) {
 
-		// if ((account1.getAccountType() != null) && (account2.getAccountType()
+		// if ((account1.getaccountType() != null) && (account2.getaccountType()
 		// != null)) {
 		// return true;
 		// }
@@ -402,7 +379,7 @@ public class WalletDAOImp implements WalletDAO {
 	}
 
 	@Override
-	public boolean validateTransfer(double balance1, double transferAmount, String account1, String account2) {
+	public boolean validateTransfer(double BALANCE1, double transferAmount, String account1, String account2) {
 
 		// for(Wallet wallet: account){
 
@@ -410,9 +387,9 @@ public class WalletDAOImp implements WalletDAO {
 		// wallet.getCustomer().getFullName().equalsIgnoreCase(name2)){
 
 		if (hasAccount(account1, account2)) {
-			if (hasNonZeroBalance(balance1)) {
+			if (hasNonZeroBALANCE(BALANCE1)) {
 
-				if (hasAvaliableFunds(balance1, transferAmount)) {
+				if (hasAvaliableFunds(BALANCE1, transferAmount)) {
 					return true;
 				}
 
@@ -434,16 +411,16 @@ public class WalletDAOImp implements WalletDAO {
 	}
 
 	@Override
-	public void viewBalance(int accountNumber) {
+	public void viewBALANCE(int accountNumber) {
 
 		// for (Wallet wallet : account) {
 		//
 		// if (validateAccountNumber(account, accountNumber)) {
-		// return wallet.getBalance();
+		// return wallet.getBALANCE();
 		// }
 		// }
 		//
-		// System.out.println("Your balance can't be found");
+		// System.out.println("Your BALANCE can't be found");
 		// return 0;
 		// String selectQuery = "SELECT * FROM walletTable WHERE id = '" +
 		// accountNumber + "'";
@@ -455,7 +432,7 @@ public class WalletDAOImp implements WalletDAO {
 			ResultSet res = preparedStatement.executeQuery();
 
 			while (res.next()) {
-				System.out.println("Account Balance: " + res.getInt("balance"));
+				System.out.println("Account BALANCE: " + res.getInt("BALANCE"));
 			}
 		} catch (SQLException e) {
 
@@ -468,12 +445,12 @@ public class WalletDAOImp implements WalletDAO {
 	 * Deletes customer wallet account from database
 	 */
 	@Override
-	public void deleteAccount(String userName, String password) {
-		String deleteQuery = "DELETE FROM walletTable WHERE password = ? AND username = ?";
+	public void deleteAccount(String userName, String PASSWORD) {
+		String deleteQuery = "DELETE FROM walletTable WHERE PASSWORD = ? AND username = ?";
 
 		try {
 			PreparedStatement preparedStatement = DBconnection.dbConnect().prepareStatement(deleteQuery);
-			preparedStatement.setString(1, password);
+			preparedStatement.setString(1, PASSWORD);
 			preparedStatement.setString(2, userName);
 			int i = preparedStatement.executeUpdate(deleteQuery);
 			if (i > 0) {
