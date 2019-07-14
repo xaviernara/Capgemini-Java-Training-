@@ -1,0 +1,91 @@
+
+======================================================
+
+	=> explore additional datasource properties in spring boot application.properties file
+	=> explore all the properties we can configure in spring boot application.properties file
+
+
+=======================================================
+
+
+
+
+Spring Boot - REST API - hibernate (native)
+
+Spring Boot - REST API - JPA (hibernate provider)
+
+Spring Boot - REST API - Spring Data JPA
+
+---------------------------------------------------------------
+
+	-> create a REST API for employee management system
+	-> REST clients should be able to
+		-> Get a list of employees		/api/employees		GET
+		-> Get a single employee by id		/api/employees/{empid}	GET
+		-> Add a new employee			/api/employees		POST	(send the data from client in the form of json object)
+		-> update an employee			/api/employees		PUT     (send the data from client in the form of json object)	
+		-> delete an employee			/api/employees/{empid}	DELETE
+		-> get count of employees
+		-> get employees whose sal is greater than given sal
+		->.....
+		->... 
+
+1. create spring boot app using start.spring.io / spring initializr
+
+
+2. configure the datasource properties in application.properties files
+
+	
+#configure datasource properties
+spring.datasource.url=jdbc:oracle:thin:@localhost:1521:xe
+spring.datasource.username=system
+spring.datasource.password=manager
+
+
+	*=> based on above configuration, spring boot will automatically create below beans...
+		1. DataSource
+		2. EntityManager
+
+
+3. create Entities
+
+	Employee
+
+
+4. create DAO interface
+
+5. Create DAO implementation
+
+6. Create REST controller
+
+
+
+
+
+
+1. Spring Boot
+
+2. Spring Data JPA
+
+3. Spring Data REST
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
